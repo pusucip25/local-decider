@@ -81,6 +81,57 @@ Costuri observate: brațul găzduit 9 937 in / 1 430 out tokeni; brațele locale
 - **Unica divergență de schemă:** `criteria` cu minim 2 itemi (API-ul găzduit acceptă 1) → `HTTP 422`.
 - `GET /v1/models` listează `laya:en`, `laya:latest`, `laya:multilingual`, `winnow:e4b`.
 
+## F. Al doilea decider: Hammer 2.1 7B prin shim System One (2026-10-07)
+
+Hammer 2.1 7B nu e un model de decizie: nu vorbește contractul (`choice` + `probabilities` +
+`confidence`). Ca să-l pot **măsura** în loc să-l presupun, l-am așezat în spatele contractului cu
+`jev-browser/scripts/hammer_systemone.py` — un shim stdlib (`http.server`) care traduce o cerere
+System One într-o cerere de chat Ollama și întoarce `answers.<head>.{choice, confidence,
+probabilities}`. Astfel `policy.py` rămâne neatinse, iar ce face rău un model general se vede ca scor.
+
+```bash
+python3 scripts/hammer_systemone.py --model hammer-bm:latest --port 11888 &
+export TYPESAFE_BASE_URL=http://127.0.0.1:11888 TYPESAFE_API_KEY=local TYPESAFE_MODEL=hammer-bm
+```
+
+**Slotul de decider (bucla de formular, același obiectiv):**
+
+| braț | decider | pași | deciding | wall | DOM final | verdict |
+|---|---|---|---|---|---|---|
+| E | `hammer-bm:latest` (7B shim) | 6 | 16,93 s | 54,7 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
+| F | `hammer-bm:latest` (7B shim), repetare | 6 | 17,97 s | 56,8 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
+
+Secvența a fost corectă din prima: `TYPE_TEXT` nume → `TYPE_TEXT` email → `SELECT` țară →
+`CLICK` checkbox → `CLICK` Confirm booking → `DONE`, de două ori la rând (`run_hammer_1.log`,
+`run_hammer_2.log`; dispatch `jev_dispatch_hammer{,2}.jsonl`). Răspunsuri brute: `{"op": "SELECT",
+"t_click": 3, "t_type_text": 4, "t_scroll": 5}`, apoi `{"op": "CLICK", "t_click": 5}`,
+`{"op": "CLICK", "t_click": 6}`, `{"op": "DONE", …}`. Când nu are nevoie de un head, îl omite
+(`hits=2/4`) — nu strică nimic, pentru că se consumă doar head-ul operației alese.
+
+**Costul față de `winnow:e4b`:** ~3,5–4× mai lent pe decizie (16,9–18,0 s vs 4,6–4,9 s pentru
+aceiași 6 pași). `t_select` a fost pre-rezolvat determinist (un singur combobox), deci nu i-a cerut
+modelului o decizie pe care regula o știa deja.
+
+**Slotul de text helper (doar la `TYPE_TEXT`/`SELECT`), 4 câmpuri din același formular:**
+
+| model | scor | observație |
+|---|---|---|
+| `hammer-bm:latest` | **4/4** | `Ms. Maria Ionescu` → `Maria Ionescu`, email, `Romania`, și **`null` pentru Notes** (refuz corect); 0,2–0,3 s cald, 4,2 s la rece |
+| `hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M` | 4/4 | identic (același model, import diferit) |
+| `llama3:8b` (incumbentul) | 3/4 | a scris `Maria Ionescu` în **Notes** — valoare inventată pentru un câmp necerut |
+| `qwen35-bm:latest` (qwen3.5:9b) | 1/4 | `content` gol la 3 din 4 (comportament de model de reasoning) → inutilizabil pe acest slot |
+
+**Avertisment de metodă:** o probă izolată, cu snapshot sintetic scris de mână (6 elemente),
+a dat `BLOCKED` pe un formular gol — adică un refuz catastrofal, care nu s-a reprodus în bucla
+reală (2/2 succes). Deci calitatea deciziei depinde vizibil de **cât de fidel e redat starea**;
+nu am măsurat unde se rupe. Proba izolată a fost a mea, nu a modelului, și nu se folosește ca dovadă.
+
+**Limita de fond a shim-ului:** raportează mereu `confidence = 1.0` și probabilități 0/1 — un model
+general nu are probabilități calibrate. Pentru buclă nu contează (se consumă doar `choice`), dar
+pentru **poarta de risc** contează: acolo designul se sprijină exact pe banda 0,4–0,6 „fără opinie".
+Cu Hammer în spatele shim-ului banda aceea nu există — deci Hammer **nu** poate ocupa slotul de
+judecător de risc fără o probă dedicată.
+
 ## E. Ce ar urma să fie măsurat (nu e făcut)
 
 1. Proba multi-site (3–5 pagini reale, etichete verificate în DOM) pentru ambele brațe — singurul mod de

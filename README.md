@@ -80,6 +80,22 @@ Latență: regulile răspund înaintea modelului, deci latența porții rămâne
 ~0,54 s (cloud). Cele 6–7 cazuri rămase **nu sunt scurgeri**: fie deciderul refuză o acțiune real
 cerută (bias conservator), fie cere confirmare pe un destinatar nenumit în cerere.
 
+### 2.4 Al doilea swap: Hammer 2.1 7B (prin shim System One) — 2/2 succes
+
+Hammer 2.1 7B nu vorbește contractul System One, deci a fost așezat în spatele lui:
+`jev-browser/scripts/hammer_systemone.py` traduce o cerere System One într-o cerere de chat Ollama
+și întoarce `answers.<head>.{choice,confidence,probabilities}`. `policy.py` — neatinse.
+
+| braț | decider | pași | deciding | DOM final | verdict |
+|---|---|---|---|---|---|
+| E | `hammer-bm:latest` | 6 | 16,93 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
+| F | `hammer-bm:latest` (repetare) | 6 | 17,97 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
+
+Secvența corectă din prima (nume → email → țară → checkbox → Confirm booking → DONE), de două ori.
+**Costul:** ~3,5–4× mai lent pe decizie decât `winnow:e4b` (16,9–18,0 s vs 4,6–4,9 s / 6 pași).
+Ca **text helper** Hammer e mai bun decât incumbentul: 4/4 pe cele 4 câmpuri, inclusiv `null`
+corect pe „Notes", unde `llama3:8b` a inventat o valoare. Detalii în `docs/RESULTS.md` §F.
+
 ## 3. Ce a divergat față de deciderul găzduit (și cum s-a rezolvat)
 
 1. **Schemă mai strictă la head-urile cu un singur candidat.** Ollaya cere `criteria` cu minim 2 itemi;

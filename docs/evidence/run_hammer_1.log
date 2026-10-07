@@ -1,0 +1,33 @@
+
+--- step 1 | Jev Test Form | 6 elements
+[01] TYPE_TEXT   textbox · Full name  (p=1.00, 1.229s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'Maria Ionescu')
+
+--- step 2 | Jev Test Form | 6 elements
+[02] TYPE_TEXT   textbox · Email address  (p=1.00, 4.436s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'maria@example.com')
+
+--- step 3 | Jev Test Form | 6 elements
+[03] SELECT      combobox · Country  (p=1.00, 4.493s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'Romania')
+
+--- step 4 | Jev Test Form | 6 elements
+[04] CLICK       checkbox · I accept the terms  (p=1.00, 4.445s, heads=t_click,t_type_text,t_scroll)
+     -> ok
+
+--- step 5 | Jev Test Form | 6 elements
+[05] CLICK       button · Confirm booking  (p=1.00, 0.951s, heads=t_click,t_type_text,t_scroll)
+     -> ok
+
+--- step 6 | Jev Test Form | 6 elements
+[06] DONE        -  (p=1.00, 1.372s, heads=t_click,t_type_text,t_scroll)
+
+=== DONE in 6 steps (54.66s wall, 16.93s deciding) ===
+tokens: {'input_tokens': 8038, 'output_tokens': 148}
+dispatch log: /c/Users/Pusu/tools/local-decider/docs/evidence/jev_dispatch_hammer.jsonl
+landed: Jev Test Form
+        file:///C:/Users/Pusu/tools/jev-browser/tests/form.html
+
+real	0m55.252s
+user	0m0.015s
+sys	0m0.030s

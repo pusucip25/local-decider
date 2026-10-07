@@ -1,0 +1,34 @@
+
+===== hammer-bm:latest   [ollama (hammer-bm:latest)] =====
+  [OK ] Full name   -> 'Maria Ionescu'                        (ollama,  4.2s)  expected 'Maria Ionescu'
+  [OK ] Email       -> 'maria@example.com'                    (ollama,  0.2s)  expected 'maria@example.com'
+  [OK ] Country     -> 'Romania'                              (ollama,  0.3s)  expected 'Romania'
+  [OK ] Notes       -> None                                   (none,  0.3s)  expected None
+  raw: '{"text": "Maria Ionescu"}'
+
+===== hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M   [ollama (hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M)] =====
+  [OK ] Full name   -> 'Maria Ionescu'                        (ollama,  3.6s)  expected 'Maria Ionescu'
+  [OK ] Email       -> 'maria@example.com'                    (ollama,  0.2s)  expected 'maria@example.com'
+  [OK ] Country     -> 'Romania'                              (ollama,  0.3s)  expected 'Romania'
+  [OK ] Notes       -> None                                   (none,  0.3s)  expected None
+  raw: '{"text": "Maria Ionescu"}'
+
+===== llama3:8b   [ollama (llama3:8b)] =====
+  [OK ] Full name   -> 'Maria Ionescu'                        (ollama,  2.6s)  expected 'Maria Ionescu'
+  [OK ] Email       -> 'maria@example.com'                    (ollama,  0.2s)  expected 'maria@example.com'
+  [OK ] Country     -> 'Romania'                              (ollama,  0.2s)  expected 'Romania'
+  [OK ] Notes       -> 'Maria Ionescu'                        (ollama,  0.2s)  expected None
+  raw: '{"text": "Maria Ionescu"}'
+
+===== qwen35-bm:latest   [ollama (qwen35-bm:latest)] =====
+  [BAD] Full name   -> None                                   (none, 15.0s)  expected 'Maria Ionescu'
+  [BAD] Email       -> None                                   (none,  2.0s)  expected 'maria@example.com'
+  [BAD] Country     -> None                                   (none,  2.0s)  expected 'Romania'
+  [OK ] Notes       -> None                                   (none,  2.0s)  expected None
+  raw: ''
+
+===== SCOR (helper slot) =====
+  hammer-bm:latest                           4/4
+  hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M    4/4
+  llama3:8b                                  4/4
+  qwen35-bm:latest                           1/4
