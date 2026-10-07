@@ -1,0 +1,31 @@
+[SMALL] FAIL T1_outreach | pasi=0 | tok_ctx=1143 | 49.5s | invalid=[]
+[SMALL] FAIL T2_email_retry | pasi=0 | tok_ctx=1140 | 2.8s | invalid=[]
+[SMALL] FAIL T3_budget | pasi=0 | tok_ctx=1134 | 2.8s | invalid=[]
+[SMALL] FAIL T4_no_tool | pasi=0 | tok_ctx=1119 | 2.3s | invalid=[]
+[SMALL] FAIL T5_verify | pasi=0 | tok_ctx=1140 | 2.8s | invalid=[]
+[SMALL] FAIL T6_cron | pasi=0 | tok_ctx=1125 | 3.0s | invalid=[]
+[SMALL] FAIL T7_memory | pasi=0 | tok_ctx=1118 | 3.2s | invalid=[]
+[SMALL] FAIL T8_contradiction | pasi=0 | tok_ctx=1119 | 2.3s | invalid=[]
+[SMALL] FAIL T9_missing_file | pasi=0 | tok_ctx=1113 | 2.8s | invalid=[]
+[SMALL] FAIL T10_chain | pasi=0 | tok_ctx=1119 | 2.7s | invalid=[]
+[SMALL] FAIL T11_extract_retry | pasi=0 | tok_ctx=1115 | 2.7s | invalid=[]
+[SMALL] FAIL T12_distractor | pasi=0 | tok_ctx=1117 | 2.3s | invalid=[]
+
+=== SUMAR ===
+SMALL: 0/12 reusite | ctx_prompt_max=1143 tok | 6.6s/call | tool-uri inventate=0 | epuizat_pasi=0 | bucla_max_acelasi_tool=1
+
+Tabel per task:
+  T1_outreach          SMALL=X   BIG=?
+  T2_email_retry       SMALL=X   BIG=?
+  T3_budget            SMALL=X   BIG=?
+  T4_no_tool           SMALL=X   BIG=?
+  T5_verify            SMALL=X   BIG=?
+  T6_cron              SMALL=X   BIG=?
+  T7_memory            SMALL=X   BIG=?
+  T8_contradiction     SMALL=X   BIG=?
+  T9_missing_file      SMALL=X   BIG=?
+  T10_chain            SMALL=X   BIG=?
+  T11_extract_retry    SMALL=X   BIG=?
+  T12_distractor       SMALL=X   BIG=?
+
+Detalii: C:\Users\Pusu\tools\local-model-bench\results_hammer21-7b.json

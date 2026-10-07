@@ -1,0 +1,40 @@
+serving StrandsAgents/strands-decider-2B-hobson-v19 on http://127.0.0.1:8010
+Fetching 37 files:   0%|          | 0/37 [00:00<?, ?it/s]Fetching 37 files: 100%|██████████| 37/37 [00:00<00:00, 2252.94it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   1%|          | 3/320 [00:00<00:11, 28.12it/s]Loading weights:   2%|▏         | 6/320 [00:00<00:13, 23.40it/s]Loading weights:   3%|▎         | 9/320 [00:00<00:17, 17.59it/s]Loading weights:   3%|▎         | 11/320 [00:00<00:17, 17.42it/s]Loading weights:   4%|▍         | 13/320 [00:00<00:17, 17.44it/s]Loading weights:  11%|█▏        | 36/320 [00:00<00:03, 73.21it/s]Loading weights:  16%|█▌        | 51/320 [00:00<00:03, 81.68it/s]Loading weights:  19%|█▉        | 61/320 [00:01<00:03, 70.67it/s]Loading weights:  22%|██▏       | 69/320 [00:01<00:03, 68.21it/s]Loading weights:  24%|██▍       | 77/320 [00:01<00:03, 66.97it/s]Loading weights:  28%|██▊       | 88/320 [00:01<00:04, 52.81it/s]Loading weights:  29%|██▉       | 94/320 [00:01<00:04, 50.86it/s]Loading weights:  32%|███▏      | 103/320 [00:01<00:03, 57.40it/s]Loading weights:  35%|███▍      | 111/320 [00:02<00:04, 49.37it/s]Loading weights: 100%|██████████| 320/320 [00:02<00:00, 146.59it/s]
+INFO:     Started server process [6024]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+INFO:     127.0.0.1:51239 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51245 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51247 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51248 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51249 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51250 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51252 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51253 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51254 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51256 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60804 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60818 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63914 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54356 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54377 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54399 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54418 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54429 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54439 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54449 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54468 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54486 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54497 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54516 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54526 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54564 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49999 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52095 - "POST /v1/systemone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64483 - "POST /v1/systemone HTTP/1.1" 200 OK

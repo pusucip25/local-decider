@@ -1,0 +1,10 @@
+[1/9] qwen_T1_bucla_8x_search            37.62s trunc=None {"tip_output": "gol", "nou": 0.05, "suficient": 0.04, "actiune": "schimba_tool", "halucinatie": 0.16, "refuz_posibil": 0.29}
+[2/9] qwen_T2_read_file_lipsa_8x         63.85s trunc=None {"tip_output": "refuz", "nou": 0.03, "suficient": 0.04, "actiune": "intreaba_utilizatorul", "halucinatie": 0.12, "refuz_posibil": 0.74}
+[3/9] qwen_T3_buget_OK                   61.7s trunc=None {"tip_output": "raspuns_final", "nou": 0.06, "suficient": 0.57, "actiune": "raspunde", "halucinatie": 0.37, "refuz_posibil": 0.81}
+[4/9] qwen_T4_fara_tool_OK               49.11s trunc=None {"tip_output": "refuz", "nou": 0.17, "suficient": 0.11, "actiune": "refuza", "halucinatie": 0.85, "refuz_posibil": 0.01}
+[5/9] hammer_T4_halucinatie              45.04s trunc=None {"tip_output": "raspuns_final", "nou": 0.46, "suficient": 0.13, "actiune": "raspunde", "halucinatie": 0.98, "refuz_posibil": 0.09}
+[6/9] hammer_T3_bucla_3x_offers          60.48s trunc=None {"tip_output": "gol", "nou": 0.23, "suficient": 0.13, "actiune": "schimba_tool", "halucinatie": 0.18, "refuz_posibil": 0.76}
+[7/9] hammer_T1_apel_ca_TEXT             70.08s trunc=None {"tip_output": "tool_call", "nou": 0.16, "suficient": 0.06, "actiune": "schimba_tool", "halucinatie": 0.31, "refuz_posibil": 0.35}
+[8/9] hammer_T12_output_gol              43.45s trunc=None {"tip_output": "gol", "nou": 0.1, "suficient": 0.05, "actiune": "refuza", "halucinatie": 0.13, "refuz_posibil": 0.05}
+[9/9] qwen_T9_fisier_lipsa               49.01s trunc=None {"tip_output": "raspuns_final", "nou": 0.04, "suficient": 0.86, "actiune": "intreaba_utilizatorul", "halucinatie": 0.16, "refuz_posibil": 0.77}
+GATA -> C:\Users\Pusu\tools\local-model-bench\arb_scored_winnow_cpu.jsonl

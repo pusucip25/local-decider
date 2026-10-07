@@ -1,0 +1,410 @@
+{
+ "SMALL": [
+  {
+   "id": "T1_outreach",
+   "success": true,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 2,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1335,
+   "latency": [
+    17.02,
+    7.66,
+    2.94
+   ],
+   "final": "{\"ok\": true, \"path\": \"C:/tmp/outreach.md\", \"bytes\": 41}",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "firme din Turda fara site",
+      "limit": "100"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/outreach.md",
+      "content": "Firma A Turda\nFirma B Turda\nFirma C Turda"
+     }
+    ]
+   ],
+   "secs": 34.0
+  },
+  {
+   "id": "T2_email_retry",
+   "success": false,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1195,
+   "latency": [
+    5.08,
+    4.41
+   ],
+   "final": "{\"error\": \"file_not_found\", \"path\": \"C:/tmp/outreach.md\"}",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ]
+   ],
+   "secs": 12.3
+  },
+  {
+   "id": "T3_budget",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1272,
+   "latency": [
+    5.59,
+    2.82
+   ],
+   "final": "{\"offers\": [{\"id\": \"H1\", \"name\": \"Host Basic\", \"price_eur\": 72}, {\"id\": \"H2\", \"name\": \"Host Plus\", \"price_eur\": 58}, {\"id\": \"H3\", \"name\": \"Host Mini\", \"price_eur\": 39}, {\"id\": \"H4\", \"name\": \"Host Pro\", \"price_eur\": 120}]}",
+   "calls": [
+    [
+     "search_offers",
+     {
+      "category": "hosting",
+      "max_price": "50"
+     }
+    ]
+   ],
+   "secs": 11.6
+  },
+  {
+   "id": "T4_no_tool",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 1,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.77
+   ],
+   "final": "Cererea nu poate fi indeplinita: nu exista in lista de unelte niciun tool pentru actiunea ceruta, deci nu o pot executa si nu am inventat niciun rezultat. Cererea era: Trimite mesajul 'salut' pe WhatsApp la numărul 0740000000.",
+   "calls": [],
+   "secs": 5.2
+  },
+  {
+   "id": "T5_verify",
+   "success": true,
+   "steps": 4,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 4,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1576,
+   "latency": [
+    5.41,
+    5.18,
+    10.01,
+    5.09,
+    2.81
+   ],
+   "final": "{\"path\": \"C:/tmp/firma.md\", \"content\": \"Firma A Turda\\nService auto. Contact: office@firmaa.ro, tel 0364 111 222.\"}",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "Turda",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/firma.md",
+      "content": "Firma A Turda\nService auto. Contact: office@firmaa.ro, tel 0364 111 222."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/firma.md"
+     }
+    ]
+   ],
+   "secs": 41.1
+  },
+  {
+   "id": "T6_cron",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1238,
+   "latency": [
+    6.64,
+    2.78
+   ],
+   "final": "{\"ok\": true, \"note\": \"operatiune simulata\"}",
+   "calls": [
+    [
+     "cron_create",
+     {
+      "schedule": "0 8 * * *",
+      "prompt": "Verificare email nou de la ANAF"
+     }
+    ]
+   ],
+   "secs": 11.9
+  },
+  {
+   "id": "T7_memory",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 1,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1118,
+   "latency": [
+    4.36
+   ],
+   "final": "Cererea nu poate fi indeplinita: nu exista in lista de unelte niciun tool pentru actiunea ceruta, deci nu o pot executa si nu am inventat niciun rezultat. Cererea era: Reține că nu-mi place să fiu sunat dimineața înainte de ora 10.",
+   "calls": [],
+   "secs": 6.5
+  },
+  {
+   "id": "T8_contradiction",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 1,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1158,
+   "latency": [
+    2.76,
+    2.77
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 6.3
+  },
+  {
+   "id": "T9_missing_file",
+   "success": false,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1168,
+   "latency": [
+    7.35,
+    4.23
+   ],
+   "final": "{\"error\": \"file_not_found\", \"path\": \"C:/tmp/notes.md\"}",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/notes.md"
+     }
+    ]
+   ],
+   "secs": 12.1
+  },
+  {
+   "id": "T10_chain",
+   "success": true,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1269,
+   "latency": [
+    9.67,
+    2.8
+   ],
+   "final": "{\"ok\": true, \"message_id\": 555}",
+   "calls": [
+    [
+     "gmail_search",
+     {
+      "query": "from:ANAF"
+     }
+    ],
+    [
+     "send_telegram",
+     {
+      "chat_id": "chat_id",
+      "text": "Rezumatul email-ului de la ANAF: termenul."
+     }
+    ]
+   ],
+   "secs": 13.2
+  },
+  {
+   "id": "T11_extract_retry",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1265,
+   "latency": [
+    7.35,
+    2.83
+   ],
+   "final": "{\"url\": \"https://firmaa.ro\", \"text\": \"<html><body><h1>Firma A Turda</h1><p>Service auto. Contact: office@firmaa.ro, tel 0364 111 222.</p></body></html>\"}",
+   "calls": [
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ]
+   ],
+   "secs": 10.8
+  },
+  {
+   "id": "T12_distractor",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 1,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "invalid_tools": [],
+   "prompt_tokens": 1117,
+   "latency": [
+    4.42
+   ],
+   "final": "Cererea nu poate fi indeplinita: nu exista in lista de unelte niciun tool pentru actiunea ceruta, deci nu o pot executa si nu am inventat niciun rezultat. Cererea era: Creează un card Kanban pentru task-ul 'sună 5 firme' și trimite-l pe Discord.",
+   "calls": [],
+   "secs": 5.0
+  }
+ ]
+}

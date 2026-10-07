@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# jev-browser - TypeSafe/Jev-driven browser agent over CDP
+HERE="C:/Users/Pusu/tools/jev-browser"
+export PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}"
+exec python3 -m jevbrowser "$@"

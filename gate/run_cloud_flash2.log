@@ -1,0 +1,31 @@
+[SMALL] OK  T1_outreach | pasi=10 | tok_ctx=3541 | 14.1s | invalid=[]
+[SMALL] FAIL T2_email_retry | pasi=13 | tok_ctx=2285 | 11.1s | invalid=[]
+[SMALL] OK  T3_budget | pasi=1 | tok_ctx=1203 | 4.0s | invalid=[]
+[SMALL] OK  T4_no_tool | pasi=0 | tok_ctx=982 | 3.1s | invalid=[]
+[SMALL] OK  T5_verify | pasi=6 | tok_ctx=1777 | 7.5s | invalid=[]
+[SMALL] OK  T6_cron | pasi=1 | tok_ctx=1229 | 3.6s | invalid=[]
+[SMALL] OK  T7_memory | pasi=1 | tok_ctx=1116 | 2.6s | invalid=[]
+[SMALL] OK  T8_contradiction | pasi=3 | tok_ctx=1450 | 7.2s | invalid=[]
+[SMALL] OK  T9_missing_file | pasi=6 | tok_ctx=1658 | 8.0s | invalid=[]
+[SMALL] FAIL T10_chain | pasi=14 | tok_ctx=2886 | 13.1s | invalid=[]
+[SMALL] OK  T11_extract_retry | pasi=1 | tok_ctx=1122 | 2.8s | invalid=[]
+[SMALL] OK  T12_distractor | pasi=0 | tok_ctx=988 | 4.4s | invalid=[]
+
+=== SUMAR ===
+SMALL: 10/12 reusite | ctx_prompt_max=3541 tok | 1.9s/call | tool-uri inventate=0 | epuizat_pasi=0 | bucla_max_acelasi_tool=4
+
+Tabel per task:
+  T1_outreach          SMALL=OK  BIG=?
+  T2_email_retry       SMALL=X   BIG=?
+  T3_budget            SMALL=OK  BIG=?
+  T4_no_tool           SMALL=OK  BIG=?
+  T5_verify            SMALL=OK  BIG=?
+  T6_cron              SMALL=OK  BIG=?
+  T7_memory            SMALL=OK  BIG=?
+  T8_contradiction     SMALL=OK  BIG=?
+  T9_missing_file      SMALL=OK  BIG=?
+  T10_chain            SMALL=X   BIG=?
+  T11_extract_retry    SMALL=OK  BIG=?
+  T12_distractor       SMALL=OK  BIG=?
+
+Detalii: C:\Users\Pusu\tools\local-model-bench\results_cloud-flash2.json

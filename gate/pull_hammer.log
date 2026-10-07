@@ -1,0 +1,13 @@
+verifying sha256 digest ⠸ [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling cd698cb286d0: 100% ▕██████████████████▏ 4.2 GB                         [K
+verifying sha256 digest [K
+writing manifest [K
+success [K[?25h[?2026l
+PULL_DONE exit=0
+NAME                                       ID              SIZE      MODIFIED               
+hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M    f4c36afbabb9    4.2 GB    Less than a second ago    
+qwen35-bm:latest                           e15b29a965b5    6.6 GB    53 minutes ago            
+qwen3.5:9b                                 6488c96fa5fa    6.6 GB    2 months ago              
+qwen3:8b                                   500a1f067a9f    5.2 GB    2 months ago              
+llama3:8b                                  365c0bd3c000    4.7 GB    2 months ago              
+llama3:latest                              365c0bd3c000    4.7 GB    2 months ago              

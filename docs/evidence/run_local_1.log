@@ -1,0 +1,8 @@
+
+--- step 1 | Jev Test Form | 6 elements
+
+=== DECIDE_FAILED: TYPESAFE HTTP 422: {"ERROR":"QUESTIONS.T_SELECT.CHOICE.CRITERIA: DICTIONARY SHOULD HAVE AT LEAST 2 ITEMS AFTER VALIDATION, NOT 1","CODE":"INVALID_REQUEST","DETAIL":[{"LOC":["BODY","QUESTIONS","T_SELECT","CHOICE","CRITERIA"],"MSG":"DICTIONARY SHOULD HAVE AT LEAST 2 ITEMS AFTER VALIDATION, NOT 1","TYPE":"TOO_SHORT","CTX":{"FIELD_TYPE":"DICTIONARY","MIN_LENGTH":2,"ACTUAL_LENGTH":1}}]} in 0 steps (0.03s wall, 0.0s deciding) ===
+tokens: {'input_tokens': 0, 'output_tokens': 0}
+dispatch log: /tmp/jev_dispatch_local.jsonl
+landed: Jev Test Form
+        file:///C:/Users/Pusu/tools/jev-browser/tests/form.html

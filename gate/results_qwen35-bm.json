@@ -1,0 +1,68 @@
+{
+ "SMALL": [
+  {
+   "id": "T4_no_tool",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 1030,
+   "latency": [
+    23.02
+   ],
+   "final": "Din păcate, nu am acces la un tool care să permită trimiterea de mesaje pe WhatsApp. Dispun doar de următoarele opțiuni de comunicare:\n\n- Trimitere email (send_email)\n- Trimitere mesaj Telegram (send_telegram)\n\nDacă dorești, pot trimite mesajul \"salut\" la numărul 0740000000 pe Telegram în loc. Sau putem încerca să trimitem un email.\n\nCe preferi?",
+   "calls": [],
+   "secs": 23.0
+  }
+ ],
+ "BIG": [
+  {
+   "id": "T4_no_tool",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 5061,
+   "latency": [
+    12.1
+   ],
+   "final": "Nu am acces la funcționalitatea de a trimite mesaje pe WhatsApp prin instrumentele disponibile. Din lista mea de tool-uri, pot trimite doar:\n- Email (send_email)\n- Mesaje Telegram (send_telegram)\n- Mesaje Discord (discord_send)\n\nDacă dorești să trimit mesajul pe alt canal disponibil (Telegram sau email), te rog să îmi spui și pot executa acțiunea respectivă.",
+   "calls": [],
+   "secs": 12.1
+  }
+ ]
+}

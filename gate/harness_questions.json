@@ -1,0 +1,39 @@
+{
+  "tip_output": {
+    "type": "choice",
+    "instructions": "Ce este textul din campul 'output_model' produs de model?",
+    "criteria": {
+      "gol": "nu contine nimic (sir vid sau doar spatii)",
+      "tool_call": "cere apelarea unui tool: listeaza unul sau mai multe tool-uri cu argumente, chiar daca e scris ca text, cod sau proza, nu ca JSON structurat",
+      "raspuns_final": "raspunde utilizatorului in limbaj natural, fara a cere vreun tool",
+      "refuz": "spune ca nu poate, ca nu are tool-ul cerut sau ca nu e nevoie de niciun tool"
+    }
+  },
+  "nou": {
+    "type": "noul",
+    "instructions": "Aduce 'ultimul_rezultat' progres real fata de ce se stia deja (rezultatele anterioare din 'rezultate_tooluri' si cererea din 'cerere')? Raspunde nu daca ultimul apel repeta aceeasi actiune cu acelasi rezultat. Daca este primul apel si intoarce date concrete, raspunde da."
+  },
+  "suficient": {
+    "type": "noul",
+    "instructions": "Rezultatele din 'rezultate_tooluri' contin deja tot ce este necesar pentru a raspunde complet la 'cerere', fara sa mai fie nevoie de alte tool-uri?"
+  },
+  "actiune": {
+    "type": "choice",
+    "instructions": "Care este actiunea corecta a agentului ACUM, dupa rezultatele de pana acum?",
+    "criteria": {
+      "continua_cu_tool": "mai este nevoie de un tool si pasul urmator aduce progres real",
+      "schimba_tool": "tool-ul folosit se repeta fara progres sau a dat eroare; trebuie alt tool sau alta abordare",
+      "raspunde": "exista deja informatia necesara; trebuie formulat raspunsul final pentru utilizator",
+      "intreaba_utilizatorul": "lipseste o informatie pe care tool-urile nu o pot obtine (fisier inexistent, date lipsa); trebuie cerute lamuriri",
+      "refuza": "cererea nu poate fi indeplinita cu tool-urile disponibile; refuz politicos"
+    }
+  },
+  "halucinatie": {
+    "type": "noul",
+    "instructions": "In 'output_model' apar fapte, actiuni savarsite sau date concrete (numere de telefon, adrese, confirmari ca ceva a fost trimis sau salvat) care NU apar in rezultatele reale ale tool-urilor din 'rezultate_tooluri'?"
+  },
+  "refuz_posibil": {
+    "type": "noul",
+    "instructions": "Exista in 'tooluri_disponibile' un tool cu care se poate indeplini cererea din 'cerere'? Raspunde nu daca cererea cere o actiune (card Kanban, Discord, WhatsApp) pentru care nu exista tool in lista."
+  }
+}

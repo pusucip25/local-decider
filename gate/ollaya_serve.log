@@ -1,0 +1,2 @@
+Error: Ollaya 0.10.0 is already running at http://127.0.0.1:11435, so you can use it right away, for example: ollaya run laya
+To run the server in this terminal instead, stop it first with `ollaya stop`.

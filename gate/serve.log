@@ -1,0 +1,10 @@
+serving StrandsAgents/strands-decider-2B-hobson-v19 on http://127.0.0.1:8010
+Fetching 37 files:   0%|          | 0/37 [00:00<?, ?it/s]Fetching 37 files: 100%|██████████| 37/37 [00:00<00:00, 2304.43it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   4%|▍         | 12/320 [00:00<00:03, 99.68it/s]Loading weights:   7%|▋         | 22/320 [00:00<00:05, 54.62it/s]Loading weights:  12%|█▏        | 38/320 [00:00<00:03, 75.84it/s]Loading weights:  19%|█▉        | 61/320 [00:00<00:02, 109.93it/s]Loading weights:  32%|███▏      | 103/320 [00:00<00:01, 184.75it/s]Loading weights:  39%|███▉      | 124/320 [00:01<00:02, 78.84it/s] Loading weights:  43%|████▎     | 139/320 [00:01<00:02, 66.76it/s]Loading weights:  54%|█████▍    | 174/320 [00:01<00:01, 95.42it/s]Loading weights:  63%|██████▎   | 201/320 [00:02<00:01, 108.81it/s]Loading weights:  68%|██████▊   | 216/320 [00:02<00:01, 90.73it/s] Loading weights:  72%|███████▏  | 229/320 [00:02<00:01, 75.28it/s]Loading weights: 100%|██████████| 320/320 [00:02<00:00, 121.37it/s]
+INFO:     Started server process [6056]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59565 - "POST /v1/systemone HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59600 - "POST /v1/systemone HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:55053 - "POST /v1/systemone HTTP/1.1" 422 Unprocessable Entity

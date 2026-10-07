@@ -1,0 +1,32 @@
+[SMALL] OK  T1_outreach | pasi=17 | tok_ctx=4292 | 20.2s | invalid=[]
+[SMALL] FAIL T2_email_retry | pasi=8 | tok_ctx=1912 | 10.0s | invalid=[]
+[SMALL] OK  T3_budget | pasi=4 | tok_ctx=1882 | 8.4s | invalid=[]
+[SMALL] OK  T4_no_tool | pasi=0 | tok_ctx=982 | 3.1s | invalid=[]
+[SMALL] OK  T5_verify | pasi=4 | tok_ctx=1615 | 6.7s | invalid=[]
+[SMALL] OK  T6_cron | pasi=1 | tok_ctx=1261 | 5.1s | invalid=[]
+[SMALL] OK  T7_memory | pasi=1 | tok_ctx=1162 | 3.1s | invalid=[]
+[SMALL] OK  T8_contradiction | pasi=4 | tok_ctx=1568 | 7.7s | invalid=[]
+[SMALL] OK  T9_missing_file | pasi=9 | tok_ctx=2099 | 11.8s | invalid=[]
+[SMALL] FAIL T10_chain | pasi=10 | tok_ctx=2512 | 12.6s | invalid=[]
+[SMALL] OK  T11_extract_retry | pasi=1 | tok_ctx=1122 | 3.3s | invalid=[]
+[SMALL] OK  T12_distractor | pasi=4 | tok_ctx=1908 | 10.4s | invalid=[]
+
+=== SUMAR ===
+SMALL: 10/12 reusite | ctx_prompt_max=4292 tok | 2.0s/call | tool-uri inventate=0 | epuizat_pasi=0 | bucla_max_acelasi_tool=5
+   poarta: allow=63 confirm=0 block=0 | erori_poarta=0
+
+Tabel per task:
+  T1_outreach          SMALL=OK  BIG=?
+  T2_email_retry       SMALL=X   BIG=?
+  T3_budget            SMALL=OK  BIG=?
+  T4_no_tool           SMALL=OK  BIG=?
+  T5_verify            SMALL=OK  BIG=?
+  T6_cron              SMALL=OK  BIG=?
+  T7_memory            SMALL=OK  BIG=?
+  T8_contradiction     SMALL=OK  BIG=?
+  T9_missing_file      SMALL=OK  BIG=?
+  T10_chain            SMALL=X   BIG=?
+  T11_extract_retry    SMALL=OK  BIG=?
+  T12_distractor       SMALL=OK  BIG=?
+
+Detalii: C:\Users\Pusu\tools\local-model-bench\results_gate2J-flash.json

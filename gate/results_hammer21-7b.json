@@ -1,0 +1,184 @@
+{
+ "SMALL": [
+  {
+   "id": "T1_outreach",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1143,
+   "latency": [
+    49.52
+   ],
+   "final": "```\n[{'name': 'web_search', 'arguments': {'query': 'firme din Turda fara site', 'limit': '100'}}]\n```",
+   "calls": [],
+   "secs": 49.5
+  },
+  {
+   "id": "T2_email_retry",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1140,
+   "latency": [
+    2.75
+   ],
+   "final": "```\n[{\"name\": \"read_file\", \"arguments\": {\"path\": \"C:/tmp/outreach.md\"}}]\n```",
+   "calls": [],
+   "secs": 2.8
+  },
+  {
+   "id": "T3_budget",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1134,
+   "latency": [
+    2.85
+   ],
+   "final": "```\n[{'name': 'search_offers', 'arguments': {'category': 'hosting', 'max_price': '50'}}]\n```",
+   "calls": [],
+   "secs": 2.8
+  },
+  {
+   "id": "T4_no_tool",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.3
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.3
+  },
+  {
+   "id": "T5_verify",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1140,
+   "latency": [
+    2.78
+   ],
+   "final": "```\n[{'name': 'web_search', 'arguments': {'query': 'Turda', 'limit': '10'}}]\n```",
+   "calls": [],
+   "secs": 2.8
+  },
+  {
+   "id": "T6_cron",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1125,
+   "latency": [
+    3.01
+   ],
+   "final": "```\n[{\"name\": \"cron_create\", \"arguments\": {\"schedule\": \"0 8 * * *\", \"prompt\": \"Verifica daca am email nou de la ANAF.\"}}]\n```",
+   "calls": [],
+   "secs": 3.0
+  },
+  {
+   "id": "T7_memory",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1118,
+   "latency": [
+    3.16
+   ],
+   "final": "```\n[{'name': 'cron_create', 'arguments': {'schedule': '0 10 * * *', 'prompt': 'Nu-mi place sa fiu sunat dimineaata inainte de ora 10.'}}]\n```",
+   "calls": [],
+   "secs": 3.2
+  },
+  {
+   "id": "T8_contradiction",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.34
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.3
+  },
+  {
+   "id": "T9_missing_file",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1113,
+   "latency": [
+    2.77
+   ],
+   "final": "```\n[{'name': 'read_file', 'arguments': {'path': 'C:/tmp/notes.md'}}]\n```",
+   "calls": [],
+   "secs": 2.8
+  },
+  {
+   "id": "T10_chain",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.71
+   ],
+   "final": "```\n[{'name': 'gmail_search', 'arguments': {'query': 'from:ANAF'}}]\n```",
+   "calls": [],
+   "secs": 2.7
+  },
+  {
+   "id": "T11_extract_retry",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1115,
+   "latency": [
+    2.71
+   ],
+   "final": "```\n[{'name': 'web_fetch', 'arguments': {'url': 'https://firmaa.ro'}}]\n```",
+   "calls": [],
+   "secs": 2.7
+  },
+  {
+   "id": "T12_distractor",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "invalid_tools": [],
+   "prompt_tokens": 1117,
+   "latency": [
+    2.33
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.3
+  }
+ ]
+}

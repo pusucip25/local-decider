@@ -1,0 +1,10 @@
+{"t": "2026-10-07T08:37:26", "epoch": 1791351446.406, "step": 1, "op": "TYPE_TEXT", "target": 1, "element": "textbox · Full name", "phase": "dispatch"}
+{"t": "2026-10-07T08:37:34", "epoch": 1791351454.901, "step": 1, "op": "TYPE_TEXT", "target": 1, "element": "textbox · Full name", "phase": "result", "outcome": "ok", "note": "ollama: 'Maria Ionescu'"}
+{"t": "2026-10-07T08:37:35", "epoch": 1791351455.504, "step": 2, "op": "TYPE_TEXT", "target": 2, "element": "textbox · Email address", "phase": "dispatch"}
+{"t": "2026-10-07T08:37:41", "epoch": 1791351461.898, "step": 2, "op": "TYPE_TEXT", "target": 2, "element": "textbox · Email address", "phase": "result", "outcome": "ok", "note": "ollama: 'maria@example.com'"}
+{"t": "2026-10-07T08:37:42", "epoch": 1791351462.441, "step": 3, "op": "SELECT", "target": 3, "element": "combobox · Country", "phase": "dispatch"}
+{"t": "2026-10-07T08:37:43", "epoch": 1791351463.231, "step": 3, "op": "SELECT", "target": 3, "element": "combobox · Country", "phase": "result", "outcome": "ok", "note": "ollama: 'Romania'"}
+{"t": "2026-10-07T08:37:43", "epoch": 1791351463.755, "step": 4, "op": "CLICK", "target": 5, "element": "checkbox · I accept the terms", "phase": "dispatch"}
+{"t": "2026-10-07T08:37:49", "epoch": 1791351469.169, "step": 4, "op": "CLICK", "target": 5, "element": "checkbox · I accept the terms", "phase": "result", "outcome": "ok"}
+{"t": "2026-10-07T08:37:49", "epoch": 1791351469.73, "step": 5, "op": "CLICK", "target": 6, "element": "button · Confirm booking", "phase": "dispatch"}
+{"t": "2026-10-07T08:37:55", "epoch": 1791351475.139, "step": 5, "op": "CLICK", "target": 6, "element": "button · Confirm booking", "phase": "result", "outcome": "ok"}

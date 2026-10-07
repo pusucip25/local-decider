@@ -1,0 +1,66 @@
+{
+ "LMSTUDIO qwen3.5-9b": {
+  "secs": 24.8,
+  "tool_calls": [
+   {
+    "type": "function",
+    "id": "17iHBy3YogkOMyMGcr3nfeRgUtPNzYT2",
+    "function": {
+     "name": "search_offers",
+     "arguments": "{\"category\":\"hosting\",\"max_price\":\"50\"}"
+    }
+   }
+  ],
+  "content": "",
+  "finish": "tool_calls",
+  "ptok": 402
+ },
+ "LMSTUDIO qwen3.5-9b|pas2": {
+  "secs": 18.2,
+  "tool_calls": [
+   {
+    "type": "function",
+    "id": "W9Z7m1XQdfZqwz9YUrn82GsHe5GDraFU",
+    "function": {
+     "name": "write_file",
+     "arguments": "{\"path\":\"C:/tmp/host.md\",\"content\":\"# Oferte Hosting (Buget: 50 EUR)\\n\\n- **ID:** H1, **Preț:** 72 EUR\\n- **ID:** H2, **Preț:** 58 EUR\\n- **ID:** H3, **Preț:** 39 EUR\\n\"}"
+    }
+   }
+  ],
+  "content": "",
+  "finish": "tool_calls",
+  "ptok": 512
+ },
+ "LMSTUDIO gemma-4-12b-qat": {
+  "secs": 71.3,
+  "tool_calls": [
+   {
+    "type": "function",
+    "id": "92gAHGOwcKXLYHE8JMpTyOYxjbKmP28P",
+    "function": {
+     "name": "search_offers",
+     "arguments": "{\"category\":\"hosting\",\"max_price\":\"50\"}"
+    }
+   }
+  ],
+  "content": "",
+  "finish": "tool_calls",
+  "ptok": 178
+ },
+ "LMSTUDIO gemma-4-12b-qat|pas2": {
+  "secs": 67.3,
+  "tool_calls": [
+   {
+    "type": "function",
+    "id": "s81CPrwQEWqGQkCZihUKrh5lJjFUqpRM",
+    "function": {
+     "name": "write_file",
+     "arguments": "{\"content\":\"Oferta de hosting sub 50 EUR: H3 (39 EUR)\",\"path\":\"C:/tmp/host.md\"}"
+    }
+   }
+  ],
+  "content": "",
+  "finish": "tool_calls",
+  "ptok": 268
+ }
+}

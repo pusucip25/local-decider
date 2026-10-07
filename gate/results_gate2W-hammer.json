@@ -1,0 +1,640 @@
+{
+ "SMALL": [
+  {
+   "id": "T1_outreach",
+   "success": false,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 2,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 1,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "firme din Turda fără site",
+      "limit": "100"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "write_file",
+     "args": {
+      "path": "C:/tmp/outreach.md",
+      "content": "Firma A Turda\nFirma B Turda\nFirma C Turda"
+     },
+     "poarta": "block",
+     "risc": 0.6036
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1375,
+   "latency": [
+    3.42,
+    3.71,
+    2.43
+   ],
+   "final": "{\"actiune_blocata_inainte_de_executie\": true, \"motiv\": \"risc ridicat sau repetare fara progres fata de rezultatele de mai sus\", \"risc\": 0.6036, \"tool\": \"write_file\"}",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "firme din Turda fără site",
+      "limit": "100"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/outreach.md",
+      "content": "Firma A Turda\nFirma B Turda\nFirma C Turda"
+     }
+    ]
+   ],
+   "secs": 10.2
+  },
+  {
+   "id": "T2_email_retry",
+   "success": false,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 2,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 2,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://www.firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1299,
+   "latency": [
+    3.08,
+    3.03,
+    2.47
+   ],
+   "final": "{\"url\": \"https://www.firmaa.ro\", \"text\": \"<html><body><h1>Firma A Turda</h1><p>Service auto. Contact: office@firmaa.ro, tel 0364 111 222.</p></body></html>\"}",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://www.firmaa.ro"
+     }
+    ]
+   ],
+   "secs": 8.6
+  },
+  {
+   "id": "T3_budget",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "search_offers",
+     "args": {
+      "category": "hosting",
+      "max_price": "50"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1272,
+   "latency": [
+    3.09,
+    2.54
+   ],
+   "final": "{\"offers\": [{\"id\": \"H1\", \"name\": \"Host Basic\", \"price_eur\": 72}, {\"id\": \"H2\", \"name\": \"Host Plus\", \"price_eur\": 58}, {\"id\": \"H3\", \"name\": \"Host Mini\", \"price_eur\": 39}, {\"id\": \"H4\", \"name\": \"Host Pro\", \"price_eur\": 120}]}",
+   "calls": [
+    [
+     "search_offers",
+     {
+      "category": "hosting",
+      "max_price": "50"
+     }
+    ]
+   ],
+   "secs": 5.6
+  },
+  {
+   "id": "T4_no_tool",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.4
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.4
+  },
+  {
+   "id": "T5_verify",
+   "success": true,
+   "steps": 4,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 4,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 4,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "Turda",
+      "limit": "10"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "write_file",
+     "args": {
+      "path": "C:/tmp/firma.md",
+      "content": "Firma A Turda\nService auto. Contact: office@firmaa.ro, tel 0364 111 222."
+     },
+     "poarta": "allow",
+     "risc": 0.1437
+    },
+    {
+     "pas": 3,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/firma.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1528,
+   "latency": [
+    3.11,
+    3.06,
+    4.14,
+    3.01,
+    2.41
+   ],
+   "final": "{\"path\": \"C:/tmp/firma.md\", \"content\": \"Firma A Turda\\nService auto. Contact: office@firmaa.ro, tel 0364 111 222.\"}",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "Turda",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/firma.md",
+      "content": "Firma A Turda\nService auto. Contact: office@firmaa.ro, tel 0364 111 222."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/firma.md"
+     }
+    ]
+   ],
+   "secs": 16.5
+  },
+  {
+   "id": "T6_cron",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "cron_create",
+     "args": {
+      "schedule": "0 8 * * *",
+      "prompt": "Verificare email nou de la ANAF"
+     },
+     "poarta": "allow",
+     "risc": 0.1272
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1190,
+   "latency": [
+    3.33,
+    2.35
+   ],
+   "final": "{\"ok\": true, \"note\": \"operatiune simulata\"}",
+   "calls": [
+    [
+     "cron_create",
+     {
+      "schedule": "0 8 * * *",
+      "prompt": "Verificare email nou de la ANAF"
+     }
+    ]
+   ],
+   "secs": 6.2
+  },
+  {
+   "id": "T7_memory",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 1118,
+   "latency": [
+    2.38
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.4
+  },
+  {
+   "id": "T8_contradiction",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    2.38
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.4
+  },
+  {
+   "id": "T9_missing_file",
+   "success": false,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/notes.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1168,
+   "latency": [
+    3.02,
+    2.38
+   ],
+   "final": "{\"error\": \"file_not_found\", \"path\": \"C:/tmp/notes.md\"}",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/notes.md"
+     }
+    ]
+   ],
+   "secs": 5.4
+  },
+  {
+   "id": "T10_chain",
+   "success": true,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 2,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 2,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "gmail_search",
+     "args": {
+      "query": "from:ANAF"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "send_telegram",
+     "args": {
+      "chat_id": "your_chat_id",
+      "text": "Ai un email nou de la ANAF cu termenul: 25.11.2026"
+     },
+     "poarta": "allow",
+     "risc": 0.1716
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1287,
+   "latency": [
+    2.89,
+    3.7,
+    2.4
+   ],
+   "final": "{\"ok\": true, \"message_id\": 555}",
+   "calls": [
+    [
+     "gmail_search",
+     {
+      "query": "from:ANAF"
+     }
+    ],
+    [
+     "send_telegram",
+     {
+      "chat_id": "your_chat_id",
+      "text": "Ai un email nou de la ANAF cu termenul: 25.11.2026"
+     }
+    ]
+   ],
+   "secs": 9.6
+  },
+  {
+   "id": "T11_extract_retry",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 1,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1217,
+   "latency": [
+    2.94,
+    2.49
+   ],
+   "final": "{\"url\": \"https://firmaa.ro\", \"text\": \"<html><body><h1>Firma A Turda</h1><p>Service auto. Contact: office@firmaa.ro, tel 0364 111 222.</p></body></html>\"}",
+   "calls": [
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ]
+   ],
+   "secs": 5.4
+  },
+  {
+   "id": "T12_distractor",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 1,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 0,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [],
+   "invalid_tools": [],
+   "prompt_tokens": 1117,
+   "latency": [
+    2.39
+   ],
+   "final": "```\n[]\n```",
+   "calls": [],
+   "secs": 2.4
+  }
+ ]
+}

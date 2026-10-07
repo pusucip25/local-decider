@@ -1,0 +1,3 @@
+FROM hf.co/eaddario/Hammer2.1-7b-GGUF:Q4_K_M
+PARAMETER num_ctx 32768
+PARAMETER temperature 0.2

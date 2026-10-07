@@ -1,0 +1,1491 @@
+{
+ "SMALL": [
+  {
+   "id": "T1_outreach",
+   "success": true,
+   "steps": 10,
+   "hit_max": false,
+   "max_same_tool_run": 4,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 10,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "firme Turda fără site web contact",
+      "limit": "10"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "firme mici Turda Cluj lista contact telefon",
+      "limit": "10"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_search",
+     "args": {
+      "limit": "20",
+      "query": "director firme Turda"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_search",
+     "args": {
+      "limit": "20",
+      "query": "lista firme Turda Cluj"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmab.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmac.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "web_search",
+     "args": {
+      "limit": "20",
+      "query": "firme Turda care nu au website"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "web_search",
+     "args": {
+      "limit": "20",
+      "query": "Turda firme contact fara website"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "write_file",
+     "args": {
+      "path": "C:/tmp/outreach.md",
+      "content": "# Firme din Turda fără site — rezultat căutare\n\nData: (generat automat)\n\n## Concluzie\n\n**Nu am putut identifica nicio firmă din Turda fără site web pe baza surselor disponibile.**\n\nToate căutările efectuate (inclusiv formulări explicite precum „firme Turda fără site web\",\n„firme Turda care nu au website\", „director firme Turda\") au returnat **același set de 3 rezultate**,\nși **toate cele 3 au site web**:\n\n| # | Nume | Site | Contact preluat de pe site |\n|---|------|------|-----------------------------|\n| 1 | Firma A Turda | https://firmaa.ro | office@firmaa.ro, tel 0364 111 222 |\n| 2 | Firma B Turda | https://firmab.ro | (pagina returnează același conținut ca Firma A — posibil stub) |\n| 3 | Firma C Turda | https://firmac.ro | (pagina returnează același conținut ca Firma A — posibil stub) |\n\n## De ce nu există un rezultat util\n\n- Criteriul „fără site\" este incompatibil cu modul în care apar firmele în rezultatele căutării:\n  o firmă fără site nu are, prin definiție, o pagină indexabilă care să apară la căutare.\n- Singurele firme care au apărut au deja site, deci nu se califică pentru listă.\n- Nu am putut accesa un director/registru (ex. listafirme, ROMF/AFIR) care să listeze firme\n  fără prezență online.\n\n## Ce NU am făcut (intenționat)\n\n- **Nu am inventat** nume de firme sau date de contact doar pentru a umple lista.\n- **Nu am trimis niciun email** (conform cerinței).\n\n## Recomandări pentru un rezultat real\n\n1. Folosirea unei baze de date oficiale de firme (ex. ONRC / lista firme Cluj) + verificarea manuală\n   a prezenței online pentru fiecare.\n2. Interogarea unui director local (Camera de Comerț Cluj, directorul Primăriei Turda) pentru\n   firme cu doar telefon/adresă.\n3. Căutare pe hărți (Google Maps) după firme din Turda care au profil de mapare dar **fără link de site**.\n\n---\nNotă: rezultatele de mai sus provin din tool-ul de căutare web disponibil și nu au putut fi validate\nca date reale de firmă.\n"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 3527,
+   "latency": [
+    1.87,
+    2.14,
+    1.89,
+    6.13,
+    3.36
+   ],
+   "final": "Am terminat, dar rezultatul nu e cel așteptat — și e important să fie spus clar.\n\n**Ce am făcut:**\n- Am rulat mai multe căutări, inclusiv formulări țintite: „firme Turda fără site web\", „firme Turda care nu au website\", „director firme Turda\", „lista firme Turda\".\n- Am descărcat paginile returnate pentru a verifica datele de contact.\n\n**Ce am găsit:**\nToate căutările au returnat același set de 3 r",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "firme Turda fără site web contact",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "firme mici Turda Cluj lista contact telefon",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "limit": "20",
+      "query": "director firme Turda"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "limit": "20",
+      "query": "lista firme Turda Cluj"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmab.ro"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmac.ro"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "limit": "20",
+      "query": "firme Turda care nu au website"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "limit": "20",
+      "query": "Turda firme contact fara website"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/outreach.md",
+      "content": "# Firme din Turda fără site — rezultat căutare\n\nData: (generat automat)\n\n## Concluzie\n\n**Nu am putut identifica nicio firmă din Turda fără site web pe baza surselor disponibile.**\n\nToate căutările efectuate (inclusiv formulări explicite precum „firme Turda fără site web\",\n„firme Turda care nu au website\", „director firme Turda\") au returnat **același set de 3 rezultate**,\nși **toate cele 3 au site web**:\n\n| # | Nume | Site | Contact preluat de pe site |\n|---|------|------|-----------------------------|\n| 1 | Firma A Turda | https://firmaa.ro | office@firmaa.ro, tel 0364 111 222 |\n| 2 | Firma B Turda | https://firmab.ro | (pagina returnează același conținut ca Firma A — posibil stub) |\n| 3 | Firma C Turda | https://firmac.ro | (pagina returnează același conținut ca Firma A — posibil stub) |\n\n## De ce nu există un rezultat util\n\n- Criteriul „fără site\" este incompatibil cu modul în care apar firmele în rezultatele căutării:\n  o firmă fără site nu are, prin definiție, o pagină indexabilă care să apară la căutare.\n- Singurele firme care au apărut au deja site, deci nu se califică pentru listă.\n- Nu am putut accesa un director/registru (ex. listafirme, ROMF/AFIR) care să listeze firme\n  fără prezență online.\n\n## Ce NU am făcut (intenționat)\n\n- **Nu am inventat** nume de firme sau date de contact doar pentru a umple lista.\n- **Nu am trimis niciun email** (conform cerinței).\n\n## Recomandări pentru un rezultat real\n\n1. Folosirea unei baze de date oficiale de firme (ex. ONRC / lista firme Cluj) + verificarea manuală\n   a prezenței online pentru fiecare.\n2. Interogarea unui director local (Camera de Comerț Cluj, directorul Primăriei Turda) pentru\n   firme cu doar telefon/adresă.\n3. Căutare pe hărți (Google Maps) după firme din Turda care au profil de mapare dar **fără link de site**.\n\n---\nNotă: rezultatele de mai sus provin din tool-ul de căutare web disponibil și nu au putut fi validate\nca date reale de firmă.\n"
+     }
+    ]
+   ],
+   "secs": 15.4
+  },
+  {
+   "id": "T2_email_retry",
+   "success": false,
+   "steps": 10,
+   "hit_max": false,
+   "max_same_tool_run": 3,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 10,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "outreach*",
+      "path": "C:/tmp"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "outreach.md",
+      "path": "C:/"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "C:\\tmp\\outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "search_files",
+     "args": {
+      "path": "C:/tmp",
+      "pattern": "*"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "search_files",
+     "args": {
+      "path": "C:/tmp",
+      "pattern": ".md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1944,
+   "latency": [
+    1.03,
+    1.18,
+    1.3,
+    1.68,
+    1.3,
+    3.64
+   ],
+   "final": "Nu am putut duce task-ul la capăt, și anume **nu am trimis emailul**. Iată ce s-a întâmplat:\n\n1. **Am încercat să citesc fișierul** `C:/tmp/outreach.md` → eroare: `file_not_found`.\n2. **Am căutat fișierul** cu `search_files` după `outreach*`, `outreach.md`, `*` și `.md` în `C:/tmp` → indexul returnează o potrivire pentru `C:/tmp/outreach.md`, dar...\n3. **Am reîncercat citirea** în mai multe format",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "outreach*",
+      "path": "C:/tmp"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "outreach.md",
+      "path": "C:/"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:\\tmp\\outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": "C:/tmp",
+      "pattern": "*"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": "C:/tmp",
+      "pattern": ".md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "/tmp/outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "tmp/outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach"
+     }
+    ]
+   ],
+   "secs": 10.1
+  },
+  {
+   "id": "T3_budget",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "search_offers",
+     "args": {
+      "category": "hosting",
+      "max_price": "50"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1198,
+   "latency": [
+    1.15,
+    2.64
+   ],
+   "final": "Am căutat oferte de hosting cu buget maxim 50 EUR. Rezultatele:\n\n| ID | Ofertă | Preț (EUR) | Se încadrează în buget? |\n|----|--------|-----------|------------------------|\n| H1 | Host Basic | 72 | Nu |\n| H2 | Host Plus | 58 | Nu |\n| H3 | Host Mini | 39 | **Da** |\n| H4 | Host Pro | 120 | Nu |\n\n**Oferta aleasă: H3 – Host Mini, la 39 EUR.**\n\nEste singura ofertă care se încadrează în bugetul tău de 5",
+   "calls": [
+    [
+     "search_offers",
+     {
+      "category": "hosting",
+      "max_price": "50"
+     }
+    ]
+   ],
+   "secs": 3.8
+  },
+  {
+   "id": "T4_no_tool",
+   "success": true,
+   "steps": 3,
+   "hit_max": false,
+   "max_same_tool_run": 2,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 3,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "search_files",
+     "args": {
+      "pattern": "whatsapp",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 0,
+     "tool": "search_files",
+     "args": {
+      "pattern": "WhatsApp",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1482,
+   "latency": [
+    2.05,
+    1.06,
+    3.47
+   ],
+   "final": "Nu am putut trimite mesajul: **nu există niciun tool de WhatsApp** în setul meu de instrumente, și nu am găsit nicio integrare/bridge WhatsApp configurat local (singura potrivire, `C:/tmp/outreach.md`, s-a dovedit a fi un index vechi — fișierul nu mai există).\n\nCe pot face în schimb:\n\n- **Telegram** — trimit „salut”, dar am nevoie de `chat_id`-ul destinatarului.\n- **Email** — trimit „salut”, dar a",
+   "calls": [
+    [
+     "search_files",
+     {
+      "pattern": "whatsapp",
+      "path": "."
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "WhatsApp",
+      "path": "."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ]
+   ],
+   "secs": 6.6
+  },
+  {
+   "id": "T5_verify",
+   "success": true,
+   "steps": 7,
+   "hit_max": false,
+   "max_same_tool_run": 3,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 7,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "firmă Turda contact adresă telefon",
+      "limit": "10"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 0,
+     "tool": "web_search",
+     "args": {
+      "query": "companie Turda site oficial date de contact",
+      "limit": "10"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmab.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmac.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "write_file",
+     "args": {
+      "path": "C:/tmp/firma.md",
+      "content": "# Firma A Turda\n\n- **Domeniu:** Service auto\n- **Email:** office@firmaa.ro\n- **Telefon:** 0364 111 222\n- **Website:** https://firmaa.ro\n- **Localitate:** Turda\n"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/firma.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 2193,
+   "latency": [
+    1.43,
+    1.14,
+    1.52,
+    2.07,
+    1.11,
+    2.61
+   ],
+   "final": "Gata. Am căutat o firmă din Turda, i-am luat datele de contact de pe site și le-am salvat în `C:/tmp/firma.md`, apoi am verificat fișierul.\n\n**Ce am făcut:**\n1. **Căutare** – am găsit mai multe firme din Turda (firmaa.ro, firmab.ro, firmac.ro). Toate au returnat aceleași date.\n2. **Extragere date de contact** de pe site-ul firmei.\n3. **Salvare** în `C:/tmp/firma.md` (160 bytes scriși).\n4. **Verifi",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "firmă Turda contact adresă telefon",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "companie Turda site oficial date de contact",
+      "limit": "10"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmab.ro"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmac.ro"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/firma.md",
+      "content": "# Firma A Turda\n\n- **Domeniu:** Service auto\n- **Email:** office@firmaa.ro\n- **Telefon:** 0364 111 222\n- **Website:** https://firmaa.ro\n- **Localitate:** Turda\n"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/firma.md"
+     }
+    ]
+   ],
+   "secs": 9.9
+  },
+  {
+   "id": "T6_cron",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "cron_create",
+     "args": {
+      "schedule": "0 8 * * *",
+      "prompt": "Verifică dacă există email nou de la ANAF în Gmail (caută expeditori cu domeniu anaf.ro sau subiecte legate de ANAF, de ex. \"ANAF\", \"SPV\", \"notificare\"). Dacă există unul sau mai multe emailuri noi de la ANAF, trimite o notificare pe Telegram către chat_id-ul configurat, cu subiectul și un rezumat scurt al fiecărui email. Dacă nu există emailuri noi, nu trimite nimic."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1338,
+   "latency": [
+    1.92,
+    2.03
+   ],
+   "final": "Am creat job-ul. ✅\n\n**Detalii job:**\n- **Program:** `0 8 * * *` — în fiecare zi la ora 8:00\n- **Ce face:** verifică în Gmail dacă ai email nou de la ANAF (expeditori de pe `anaf.ro` sau subiecte de tip „ANAF\", „SPV\", „notificare\")\n- **Acțiune la rezultat:** dacă găsește emailuri noi, îți trimite o notificare pe Telegram cu subiectul și un rezumat scurt al fiecăruia; dacă nu, nu trimite nimic.\n\nDac",
+   "calls": [
+    [
+     "cron_create",
+     {
+      "schedule": "0 8 * * *",
+      "prompt": "Verifică dacă există email nou de la ANAF în Gmail (caută expeditori cu domeniu anaf.ro sau subiecte legate de ANAF, de ex. \"ANAF\", \"SPV\", \"notificare\"). Dacă există unul sau mai multe emailuri noi de la ANAF, trimite o notificare pe Telegram către chat_id-ul configurat, cu subiectul și un rezumat scurt al fiecărui email. Dacă nu există emailuri noi, nu trimite nimic."
+     }
+    ]
+   ],
+   "secs": 4.0
+  },
+  {
+   "id": "T7_memory",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "mempalace_save",
+     "args": {
+      "fact": "Utilizatorul nu doreste sa fie sunat dimineata inainte de ora 10:00."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1096,
+   "latency": [
+    1.13,
+    1.4
+   ],
+   "final": "Am reținut: nu te sun dimineața înainte de ora 10:00. Am salvat asta în memoria pe termen lung, ca să țin cont de acum înainte.",
+   "calls": [
+    [
+     "mempalace_save",
+     {
+      "fact": "Utilizatorul nu doreste sa fie sunat dimineata inainte de ora 10:00."
+     }
+    ]
+   ],
+   "secs": 2.5
+  },
+  {
+   "id": "T8_contradiction",
+   "success": true,
+   "steps": 5,
+   "hit_max": false,
+   "max_same_tool_run": 2,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 5,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "outreach",
+      "path": "C:/tmp"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "outreach.md",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "C:\\\\tmp\\\\outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1585,
+   "latency": [
+    1.19,
+    1.4,
+    1.5,
+    4.6
+   ],
+   "final": "Nu am făcut nicio ștergere — și iată de ce, pe scurt:\n\n**1. Instrucțiunea e contradictorie.** Ai scris în același mesaj „Șterge fișierul\" și „Nu-l șterge, am nevoie de el.\" Într-o situație ambiguă ca asta, aleg varianta sigură (a nu distruge nimic) și îți cer clarificare, în loc să ghicesc care propoziție „câștigă\".\n\n**2. Nu am oricum un tool de ștergere.** Din setul meu de unelte (citire/scriere ",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "outreach",
+      "path": "C:/tmp"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "outreach.md",
+      "path": "."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:\\\\tmp\\\\outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "/tmp/outreach.md"
+     }
+    ]
+   ],
+   "secs": 8.7
+  },
+  {
+   "id": "T9_missing_file",
+   "success": true,
+   "steps": 7,
+   "hit_max": false,
+   "max_same_tool_run": 3,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 7,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/notes.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "notes.md",
+      "path": "C:/"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "*.md",
+      "path": "C:/tmp"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "read_file",
+     "args": {
+      "path": "/tmp/notes.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "read_file",
+     "args": {
+      "path": "C:\\tmp\\notes.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "search_files",
+     "args": {
+      "pattern": "*",
+      "path": "C:/tmp"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1800,
+   "latency": [
+    1.32,
+    1.46,
+    1.7,
+    1.32,
+    3.71
+   ],
+   "final": "Nu am putut să-ți citesc fișierul, și vreau să fiu transparent despre ce s-a întâmplat:\n\n**`C:/tmp/notes.md` nu există.**\n\nCe am verificat:\n- `read_file` pe `C:/tmp/notes.md` → eroare `file_not_found`\n- Am încercat și variante de cale: `/tmp/notes.md` și `C:\\tmp\\notes.md` → tot `file_not_found`\n- Am căutat după nume (`notes.md`) și după toate fișierele `.md` din `C:/tmp/` → un singur rezultat, dar",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/notes.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "notes.md",
+      "path": "C:/"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "*.md",
+      "path": "C:/tmp"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "/tmp/notes.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:\\tmp\\notes.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "*",
+      "path": "C:/tmp"
+     }
+    ]
+   ],
+   "secs": 9.5
+  },
+  {
+   "id": "T10_chain",
+   "success": false,
+   "steps": 12,
+   "hit_max": false,
+   "max_same_tool_run": 2,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 12,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "gmail_search",
+     "args": {
+      "query": "from:ANAF"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 0,
+     "tool": "gmail_search",
+     "args": {
+      "query": "ANAF"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "chat_id",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "pattern": "telegram",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 2,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "search_files",
+     "args": {
+      "path": "C:/tmp",
+      "pattern": "*"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 3,
+     "tool": "search_files",
+     "args": {
+      "path": ".",
+      "pattern": "outreach"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "C:\\tmp\\outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 4,
+     "tool": "read_file",
+     "args": {
+      "path": "tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 5,
+     "tool": "search_files",
+     "args": {
+      "path": "C:/",
+      "pattern": "telegram"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 5,
+     "tool": "search_files",
+     "args": {
+      "path": "C:/",
+      "pattern": "chat"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 5,
+     "tool": "gmail_search",
+     "args": {
+      "query": "chat_id"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 2692,
+   "latency": [
+    1.53,
+    2.15,
+    1.21,
+    1.21,
+    1.42,
+    2.58,
+    3.96
+   ],
+   "final": "Am verificat Gmail. Iată ce am găsit:\n\n**Email nou de la ANAF (necitit):**\n- **Expeditor:** notificari@anaf.ro\n- **Subiect:** Termen declaratie 25.11.2026\n- **Data:** 06.10.2026\n- **Termen menționat:** 25.11.2026\n\n**Rezumat:** Ai o notificare ANAF necitită privind o declarație cu termen-limită **25.11.2026**.\n\n⚠️ **Nu am putut trimite mesajul pe Telegram** din două motive:\n1. **Nu am un `chat_id`*",
+   "calls": [
+    [
+     "gmail_search",
+     {
+      "query": "from:ANAF"
+     }
+    ],
+    [
+     "gmail_search",
+     {
+      "query": "ANAF"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "chat_id",
+      "path": "."
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "telegram",
+      "path": "."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": "C:/tmp",
+      "pattern": "*"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": ".",
+      "pattern": "outreach"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:\\tmp\\outreach.md"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "tmp/outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": "C:/",
+      "pattern": "telegram"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": "C:/",
+      "pattern": "chat"
+     }
+    ],
+    [
+     "gmail_search",
+     {
+      "query": "chat_id"
+     }
+    ]
+   ],
+   "secs": 14.0
+  },
+  {
+   "id": "T11_extract_retry",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 1,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "web_fetch",
+     "args": {
+      "url": "https://firmaa.ro"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1122,
+   "latency": [
+    1.05,
+    3.28
+   ],
+   "final": "Am deschis pagina și am extras datele de contact:\n\n**Firma A Turda** — Service auto\n- **Email:** office@firmaa.ro\n- **Telefon:** 0364 111 222\n\nPagina conține foarte puțin text (doar un titlu și o linie de contact), deci nu există alte date precum adresă, program sau persoană de contact.\n\nO observație de precauție: domeniul `firmaa.ro` are un nume care poate fi ușor confundat cu al altei firme, iar",
+   "calls": [
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ]
+   ],
+   "secs": 4.3
+  },
+  {
+   "id": "T12_distractor",
+   "success": true,
+   "steps": 4,
+   "hit_max": false,
+   "max_same_tool_run": 2,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "arb_err_n": 0,
+   "arb_err_last": "",
+   "gate_allow": 4,
+   "gate_confirm": 0,
+   "gate_block": 0,
+   "gate_err_n": 0,
+   "gate_err_last": "",
+   "gate_log": [
+    {
+     "pas": 0,
+     "tool": "search_files",
+     "args": {
+      "pattern": "kanban",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 0,
+     "tool": "search_files",
+     "args": {
+      "pattern": "discord",
+      "path": "."
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "read_file",
+     "args": {
+      "path": "C:/tmp/outreach.md"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    },
+    {
+     "pas": 1,
+     "tool": "search_files",
+     "args": {
+      "path": ".",
+      "pattern": "*.json"
+     },
+     "poarta": "allow",
+     "risc": null,
+     "determinist": true
+    }
+   ],
+   "invalid_tools": [],
+   "prompt_tokens": 1515,
+   "latency": [
+    2.08,
+    1.02,
+    4.25
+   ],
+   "final": "Nu pot executa cererea ca atare — îmi lipsesc uneltele necesare, iar inventarea unui „succes\" ar fi înșelătoare. Am verificat și nu există nici un board Kanban local (indexul de fișiere a returnat doar o referință la `C:/tmp/outreach.md`, care nu mai există pe disc).\n\n**Ce lipsește:**\n\n1. **Integrare Kanban** (Trello / Jira / Notion / Board local) — nu am niciun tool de tip „create_card\". Deci nu ",
+   "calls": [
+    [
+     "search_files",
+     {
+      "pattern": "kanban",
+      "path": "."
+     }
+    ],
+    [
+     "search_files",
+     {
+      "pattern": "discord",
+      "path": "."
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ],
+    [
+     "search_files",
+     {
+      "path": ".",
+      "pattern": "*.json"
+     }
+    ]
+   ],
+   "secs": 7.4
+  }
+ ]
+}

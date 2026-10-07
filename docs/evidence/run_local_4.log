@@ -1,0 +1,29 @@
+
+--- step 1 | Jev Test Form | 6 elements
+[01] TYPE_TEXT   textbox · Full name  (p=0.57, 0.811s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'Maria Ionescu')
+
+--- step 2 | Jev Test Form | 6 elements
+[02] TYPE_TEXT   textbox · Email address  (p=0.76, 0.797s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'maria@example.com')
+
+--- step 3 | Jev Test Form | 6 elements
+[03] SELECT      combobox · Country  (p=0.73, 0.801s, heads=t_click,t_type_text,t_scroll)
+     -> ok (ollama: 'Romania')
+
+--- step 4 | Jev Test Form | 6 elements
+[04] CLICK       checkbox · I accept the terms  (p=0.39, 0.618s, heads=t_click,t_type_text,t_scroll)
+     -> ok
+
+--- step 5 | Jev Test Form | 6 elements
+[05] CLICK       button · Confirm booking  (p=0.17, 0.893s, heads=t_click,t_type_text,t_scroll)  <-- guard: done:Confirm booking
+     -> ok
+
+--- step 6 | Jev Test Form | 6 elements
+[06] DONE        -  (p=0.54, 0.962s, heads=t_click,t_type_text,t_scroll)
+
+=== DONE in 6 steps (31.86s wall, 4.88s deciding) ===
+tokens: {'input_tokens': 17045, 'output_tokens': 0}
+dispatch log: /tmp/jev_dispatch_local3.jsonl
+landed: Jev Test Form
+        file:///C:/Users/Pusu/tools/jev-browser/tests/form.html

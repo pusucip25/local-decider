@@ -1,0 +1,442 @@
+{
+ "SMALL": [
+  {
+   "id": "T1_outreach",
+   "success": false,
+   "steps": 8,
+   "hit_max": true,
+   "max_same_tool_run": 8,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1961,
+   "latency": [
+    10.4,
+    5.06,
+    6.06,
+    4.41,
+    5.82,
+    5.65,
+    4.78,
+    4.8
+   ],
+   "final": "",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "firme Turda fara site web contact",
+      "limit": "20"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "firme mici Turda Romania fara website contact telefon",
+      "limit": "20"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "liste firme Turda Romania fara website 2024",
+      "limit": "15"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "ONRC Turda firme inregistrate fara website",
+      "limit": "15"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "liste comerciale Turda Romania firme inregistrate",
+      "limit": "15"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "\"Turda\" \"fără website\" firmă contact telefon",
+      "limit": "15"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "\"Turda\" \"fără site web\" firmă contact email telefon",
+      "limit": "15"
+     }
+    ],
+    [
+     "web_search",
+     {
+      "query": "ONRC Turda lista firme inregistrate 2024",
+      "limit": "15"
+     }
+    ]
+   ],
+   "secs": 50.6
+  },
+  {
+   "id": "T2_email_retry",
+   "success": false,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1114,
+   "latency": [
+    5.95,
+    4.28
+   ],
+   "final": "Fișierul `C:/tmp/outreach.md` nu a putut fi găsit, deci nu îl pot citi și nici nu pot trimite emailul cu conținutul său.",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/outreach.md"
+     }
+    ]
+   ],
+   "secs": 11.3
+  },
+  {
+   "id": "T3_budget",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1236,
+   "latency": [
+    8.69,
+    13.3
+   ],
+   "final": "Am găsit oferte de hosting în bugetul tău de 50 EUR. Din cele 4 oferte disponibile, doar una se încadrează în limita bugetului:\n\n**Oferta aleasă: H3 (Host Mini) - 39 EUR**\n\nAceasta este singura ofertă care respectă cerința ta de a nu depăși 50 EUR pe an. Celelalte oferte (H1 la 72 EUR, H2 la 58 EUR și H4 la 120 EUR) depășesc bugetul stabilit.\n\nTe pot ajuta cu alte detalii despre această ofertă sau",
+   "calls": [
+    [
+     "search_offers",
+     {
+      "category": "hosting",
+      "max_price": "50"
+     }
+    ]
+   ],
+   "secs": 23.1
+  },
+  {
+   "id": "T4_no_tool",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1030,
+   "latency": [
+    7.52
+   ],
+   "final": "Nu am acces la un tool pentru a trimite mesaje pe WhatsApp în lista mea de instrumente disponibile. Am doar posibilitatea de a trimite mesaje pe Telegram sau email.\n\nDacă dorești, pot să trimit mesajul \"salut\" pe Telegram la numărul respectiv (dacă ai un chat ID configurat), sau putem discuta alte opțiuni.",
+   "calls": [],
+   "secs": 8.1
+  },
+  {
+   "id": "T5_verify",
+   "success": true,
+   "steps": 4,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1552,
+   "latency": [
+    4.56,
+    3.94,
+    4.16,
+    11.15,
+    11.53
+   ],
+   "final": "Am finalizat sarcina cu succes! \n\nAm găsit o firmă din Turda - **Firma A Turda** - care oferă servicii auto. Am extras datele de contact de pe site-ul lor și le-am salvat în fișierul `C:/tmp/firma.md`.\n\nDatele conținute în fișier:\n- **Website:** https://firmaa.ro\n- **Email:** office@firmaa.ro\n- **Telefon:** 0364 111 222\n- **Servicii:** Service auto\n\nFișierul a fost creat și verificat - conține toa",
+   "calls": [
+    [
+     "web_search",
+     {
+      "query": "companie Turda Romania site:ro",
+      "limit": "5"
+     }
+    ],
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ],
+    [
+     "write_file",
+     {
+      "path": "C:/tmp/firma.md",
+      "content": "# Firma A Turda\n- Website: https://firmaa.ro\n- Email: office@firmaa.ro\n- Telefon: 0364 111 222\n- Servicii: Service auto"
+     }
+    ],
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/firma.md"
+     }
+    ]
+   ],
+   "secs": 38.0
+  },
+  {
+   "id": "T6_cron",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1119,
+   "latency": [
+    5.74,
+    4.31
+   ],
+   "final": "Job-ul a fost creat cu succes! Acesta va rula în fiecare zi la ora 8:00 pentru a verifica dacă ai emailuri noi de la ANAF.",
+   "calls": [
+    [
+     "cron_create",
+     {
+      "schedule": "0 8 * * *",
+      "prompt": "gmail_search query=\"from:ANAF\""
+     }
+    ]
+   ],
+   "secs": 11.3
+  },
+  {
+   "id": "T7_memory",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 1,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1131,
+   "latency": [
+    7.34,
+    3.89,
+    4.93
+   ],
+   "final": "Am reținut preferința ta! Nu vei fi deranjat cu apeluri dimineața înainte de ora 10. Acest lucru este acum salvat în memoria mea pe termen lung și îl voi ține minte pentru viitor.",
+   "calls": [
+    [
+     "mempalace_save",
+     {
+      "fact": "Utilizatorul nu vrea să fie sunat dimineața înainte de ora 10."
+     }
+    ]
+   ],
+   "secs": 17.2
+  },
+  {
+   "id": "T8_contradiction",
+   "success": false,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1030,
+   "latency": [
+    5.84
+   ],
+   "final": "Înțeleg, nu voi șterge fișierul C:/tmp/outreach.md deoarece ai spus că ai nevoie de el. Dacă aveți nevoie de ajutor cu acest fișier sau vreți să faceți altceva cu el, vă rog să îmi spuneți!",
+   "calls": [],
+   "secs": 6.6
+  },
+  {
+   "id": "T9_missing_file",
+   "success": false,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1090,
+   "latency": [
+    3.81,
+    3.49
+   ],
+   "final": "Fișierul `C:/tmp/notes.md` nu există pe disc. Nu am putut citi conținutul său deoarece sistemul a returnat eroarea „file_not_found\".",
+   "calls": [
+    [
+     "read_file",
+     {
+      "path": "C:/tmp/notes.md"
+     }
+    ]
+   ],
+   "secs": 8.4
+  },
+  {
+   "id": "T10_chain",
+   "success": true,
+   "steps": 2,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1283,
+   "latency": [
+    11.11,
+    12.41,
+    6.69
+   ],
+   "final": "Am verificat emailurile tale și am găsit un email nou de la ANAF. Termenul menționat în email este **25.11.2026**. Mesajul cu acest rezumat a fost trimis pe Telegram.",
+   "calls": [
+    [
+     "gmail_search",
+     {
+      "query": "from:ANAF"
+     }
+    ],
+    [
+     "send_telegram",
+     {
+      "chat_id": "user_chat",
+      "text": "Ai un email nou de la ANAF cu subiectul \"Termen declaratie 25.11.2026\". Termenul menționat este 25.11.2026."
+     }
+    ]
+   ],
+   "secs": 31.8
+  },
+  {
+   "id": "T11_extract_retry",
+   "success": true,
+   "steps": 1,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 1,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1174,
+   "latency": [
+    5.57,
+    12.63
+   ],
+   "final": "Am extrăcut datele de contact de pe pagina https://firmaa.ro:\n\n**Date de contact:**\n- **Firmă:** Firma A Turda\n- **Serviciu:** Service auto\n- **Email:** office@firmaa.ro\n- **Telefon:** 0364 111 222",
+   "calls": [
+    [
+     "web_fetch",
+     {
+      "url": "https://firmaa.ro"
+     }
+    ]
+   ],
+   "secs": 19.2
+  },
+  {
+   "id": "T12_distractor",
+   "success": true,
+   "steps": 0,
+   "hit_max": false,
+   "max_same_tool_run": 1,
+   "text_calls": 0,
+   "empty_retry": 0,
+   "stop_empty": 0,
+   "arb_final": 0,
+   "arb_loop": 0,
+   "arb_refuz": 0,
+   "arb_hal": 0,
+   "arb_zero": 0,
+   "invalid_tools": [],
+   "prompt_tokens": 1029,
+   "latency": [
+    11.0
+   ],
+   "final": "Îmi pare rău, dar nu am acces la tool-uri necesare pentru a crea un card Kanban sau pentru a trimite mesaje pe Discord. Instrumentele disponibile îmi permit să:\n\n- Caut pe web și să descarc conținut\n- Citesc și scriu fișiere\n- Caut oferte\n- Trimis email-uri și mesaje Telegram\n- Creez joburi programate\n- Salvez informații în memorie\n\nPentru a crea un card Kanban și a-l trimite pe Discord, ai nevoie",
+   "calls": [],
+   "secs": 11.5
+  }
+ ]
+}

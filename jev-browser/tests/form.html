@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Jev Test Form</title>
+<style>
+ body{font:15px/1.5 system-ui;margin:40px;max-width:560px}
+ label{display:block;margin:14px 0 4px;font-weight:600}
+ input,select,textarea{width:100%;padding:7px;font:inherit}
+ .row{display:flex;align-items:center;gap:8px;margin:18px 0}
+ .row input{width:auto}
+ button{margin-top:18px;padding:10px 20px;font:inherit;cursor:pointer}
+ #result{margin-top:22px;padding:14px;border:2px solid #0a0;display:none}
+ #noise{color:#888;font-size:12px}
+</style></head>
+<body>
+<h1>Booking form</h1>
+<div id="noise">Step 1 of 2 — fill every field, tick the box, then submit.</div>
+
+<label for="fullname">Full name</label>
+<input id="fullname" name="fullname" type="text" placeholder="e.g. Maria Ionescu">
+
+<label for="email">Email address</label>
+<input id="email" name="email" type="email" placeholder="you@example.com">
+
+<label for="country">Country</label>
+<select id="country" name="country">
+  <option value="">-- choose --</option>
+  <option>Romania</option>
+  <option>France</option>
+  <option>Germany</option>
+  <option>Philippines</option>
+</select>
+
+<label for="notes">Notes</label>
+<textarea id="notes" name="notes" rows="2" placeholder="optional"></textarea>
+
+<div class="row"><input id="agree" name="agree" type="checkbox"><label for="agree" style="margin:0">I accept the terms</label></div>
+
+<button id="submit" type="button">Confirm booking</button>
+
+<div id="result"></div>
+
+<script>
+document.getElementById('submit').addEventListener('click', () => {
+  const v = id => document.getElementById(id).value.trim();
+  const ok = v('fullname') && v('email') && v('country') && document.getElementById('agree').checked;
+  const r = document.getElementById('result');
+  r.style.display = 'block';
+  r.textContent = ok
+    ? `SUBMITTED|name=${v('fullname')}|email=${v('email')}|country=${v('country')}|notes=${v('notes')}|agree=yes`
+    : `INCOMPLETE|name=${v('fullname')}|email=${v('email')}|country=${v('country')}|agree=${document.getElementById('agree').checked}`;
+});
+</script>
+</body></html>
