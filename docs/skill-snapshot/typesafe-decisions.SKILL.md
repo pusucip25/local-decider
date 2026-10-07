@@ -1,7 +1,7 @@
 ---
 name: typesafe-decisions
 description: "TypeSafe / Jev (System One) decision API — calibrated yes/no, choice and score judgements from text instead of fragile regex/parsing or LLM prose. Use for triaging outreach replies, qualifying leads, gating prompts/outputs, dedupe and routing."
-version: 1.0.0
+version: 1.1.0
 author: Pusu + Hermes
 license: MIT
 platforms: [linux, macos, windows]
@@ -476,6 +476,56 @@ never leaked in 112 cases, stays entirely deterministic.
 not a deliverable as a *blocker*: the neural part only ever escalates to `confirm`; `block` is always
 deterministic. Smoke-verified end to end on `T2_email_retry`
 (`LM_BENCH_GATE=2 LM_BENCH_GATE_BIN=1 LM_BENCH_SD_API=http://127.0.0.1:11435/v1/systemone`).
+
+## The decider swapped to LOCAL inside a real browser loop (done + DOM-verified 2026-10-07)
+
+This is the payoff of "put the judge in the house": `~/tools/jev-browser` (the ported `jev-ultrafast`
+loop) now runs end to end with **Ollaya's `winnow:e4b` as its decider**, no cloud call, no key.
+
+**The swap is an environment variable, not a code change.** `jevbrowser/policy.py` already read
+`TYPESAFE_BASE_URL`:
+
+```bash
+export TYPESAFE_BASE_URL=http://127.0.0.1:11435 TYPESAFE_API_KEY=local TYPESAFE_MODEL=winnow:e4b
+./jev-browser doctor        # -> "typesafe api ok (model winnow:e4b, 94 in-tokens)"
+```
+
+The client was never touched — Ollaya answers the System One contract exactly as the cloud does.
+
+**Only two things diverge, and both are fixed deterministically (rules, not a bigger model):**
+
+1. **Stricter schema on single-candidate heads.** Ollaya requires `criteria` with **≥2** items;
+   the hosted API accepts 1 → `HTTP 422 … T_SELECT.CHOICE.CRITERIA … min_length 2` on any page
+   with a lone combobox. Fix in `build_questions`: a head with one candidate needs no judgement →
+   resolve it locally, don't ask (`fixed` / `pre_resolved`, confidence 1.0).
+2. **Premature `DONE`.** `winnow` declared DONE at step 5 (p=0.78) without pressing Submit, and
+   **reproduced bit-identically** (0.76/0.73/0.39 on the actions) — deterministic, not noise.
+   Fix: `done_guard()` in front of DONE — if the goal asks for a submission (`SUBMIT_VERBS`) and an
+   enabled, in-view submit control was never acted on, DONE becomes CLICK on it. **DONE is a claim,
+   not evidence.** 6/6 offline unit cases.
+
+| arm | decider | guard | steps | deciding | final DOM | verdict |
+|---|---|---|---|---|---|---|
+| A | `jev-latest` (cloud) | — | 6 | 2.45 s | SUBMITTED | success |
+| B | `winnow:e4b` | — | 5 | 3.87/4.94 s | Submit never clicked | **fail** |
+| C | `winnow:e4b` | yes | 6 | 4.88/4.60 s | SUBMITTED | **success** |
+| D | `jev-latest` | yes | 6 | 2.45 s | SUBMITTED | success, guard silent |
+
+Verify with the page, not the agent's report: `python3 scripts/state.py` reads `#result` over CDP
+→ `SUBMITTED|name=Maria Ionescu|email=maria@example.com|country=Romania|notes=|agree=yes`.
+Local arm: **0 external tokens**; cloud arm 9 937 in / 1 430 out. Local is **~2.4x slower per
+decision** (≈1.0 s vs 0.41 s) — the remaining weakness, and the reason `laya:*` is worth a try.
+
+Environment traps that cost real time here:
+- `python` has no `websocket-client`; use **`python3`**.
+- CDP on 9222 rejects the handshake without `suppress_origin=True` (`create_connection`) /
+  `--remote-allow-origins`. Symptom: silent 403.
+- Run Chrome with a dedicated profile (`--user-data-dir=C:/Users/Pusu/.chrome-jev`) so the user's
+  real profile is never touched.
+- In git-bash, a native program cannot see bash's `$TMPDIR` (it reads `C:\tmp`); pass real paths.
+
+Everything (code, result files, raw logs, this skill snapshot) is archived in the **private** repo
+`github.com/pusucip25/local-decider`, local copy `~/tools/local-decider`, numbers in `docs/RESULTS.md`.
 
 ## Pitfalls
 
