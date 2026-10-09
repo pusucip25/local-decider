@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Independent check of local-decider's headline claim:
 
-    "the deterministic rule chain alone resolves 61/61 of the 112 labelled
-     cases with ZERO leaks"
+    "the deterministic rule chain alone resolves the 58/61 recorded cases
+     (95%) with ZERO leaks"
+
+(An earlier revision of this harness printed "61/61": that was the same
+variable on both sides of the ratio, so it was true by construction. The
+honest figure is 58/61.)
 
 This does NOT call any model. It re-implements the same ordered chain as
 gate/gate_ext_run.py using the repo's own gate_rules helpers (single source),
@@ -14,7 +18,7 @@ stops before the neural step, and reports:
     matters, per the project's own definition)
   * over-confirms — `confirm` where the label was `allow` (costs a question)
 
-Usage: python3 verify_rules_only.py [gate_dir]
+Usage: python3 gate/verify_rules_only.py [gate_dir]      # defaults to its own dir
 """
 from __future__ import annotations
 
@@ -24,7 +28,8 @@ import re
 import sys
 from pathlib import Path
 
-GATE = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
+HERE = Path(__file__).resolve().parent
+GATE = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else HERE
 sys.path.insert(0, str(GATE))
 
 from gate_rules import (  # noqa: E402
