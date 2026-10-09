@@ -165,8 +165,9 @@ def main(argv=None) -> int:
         sp.add_argument("--verbose", "-v", action="store_true")
         sp.add_argument("--max-elements", type=int, default=60)
         sp.add_argument("--decide-model", default=DEFAULT_MODEL, help="jev-latest | jev-preview")
-        sp.add_argument("--text-provider", default="auto",
-                        help="auto | lmstudio | ollama | deepseek | none")
+        sp.add_argument("--text-provider", default=None,
+                        help="auto | lmstudio | ollama | deepseek | none "
+                             "(default: $JEV_TEXT_PROVIDER, else auto)")
         sp.add_argument("--text-model", default=None)
         sp.add_argument("--dispatch-log", default=None,
                         help="append-only JSONL of issued mutations "

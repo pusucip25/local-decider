@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 # jev-browser - TypeSafe/Jev-driven browser agent over CDP
-HERE="C:/Users/Pusu/tools/jev-browser"
+# Resolve this script's own directory so the launcher works from any OS/path
+# (the original hard-coded C:/Users/Pusu/tools/jev-browser), and prefer a
+# project venv when one exists so the websocket-client dependency is found.
+HERE="$(cd -- "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")" && pwd)"
 export PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}"
-exec python3 -m jevbrowser "$@"
+PY=python3
+[ -x "$HERE/../.venv/bin/python" ] && PY="$HERE/../.venv/bin/python"
+exec "$PY" -m jevbrowser "$@"

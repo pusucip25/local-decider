@@ -1,162 +1,198 @@
 # local-decider
 
-**EN:** a browser agent whose *decision model* (the part that picks the next action) runs entirely on a
-local GPU behind the same HTTP contract as the hosted one — plus a hard rule: **anything that can be
-decided by a rule is decided by a rule, not by weights.** Measured on a labelled 112-case safety probe
-and on a live CDP browser loop, with the final state verified in the DOM, not in the agent's own report.
+**A browser agent whose *decision model* — the part that picks the next action — runs entirely on a
+local GPU, behind the same HTTP contract as the hosted one. Plus one hard rule:
+anything that can be decided by a rule is decided by a rule, not by weights.**
 
-**RO, teza:** decizia poate rula în casă — gratis, fără ca starea personală să plece la un API extern.
-Iar ce e determinist se decide determinist: **modelul propune, regula dispune.**
-Un fals-`allow` e un incident; un fals-`confirm` e o întrebare. Poarta se judecă după **scurgeri**, nu după acuratețe.
+Measured on a labelled 112-case safety probe and on a live CDP browser loop, with the final state
+verified **in the DOM, not in the agent's own report**.
+
+> A false `allow` is an incident; a false `confirm` is a question.
+> **The gate is judged by leaks, not by accuracy.**
+
+*Română: [README.ro.md](README.ro.md).*
 
 ---
 
-## 1. Ce e în repo
+## 1. What is in this repo
 
-| director | ce este | stare (7 oct 2026) |
+| directory | what it is | state (7 Oct 2026) |
 |---|---|---|
-| `gate/` | poarta pre-acțiune `allow / confirm / block` pentru agentul de unelte: reguli deterministe + decider neural, 112 cazuri etichetate | livrată, măsurată, **scurgeri 0** |
-| `jev-browser/` | bucla `jev-ultrafast` (browser-use) portată peste CDP minimal, decider comutabil prin `TYPESAFE_BASE_URL` | funcțională end-to-end; decider local verificat în DOM |
-| `docs/RESULTS.md` | toate cifrele, negativele incluse, cu numele fișierelor de dovadă | |
-| `docs/evidence/` | log-uri brute ale rulărilor + jurnale de mutație (dispatch JSONL) | |
-| `docs/skill-snapshot/` | snapshot al skill-ului `typesafe-decisions` folosit la construcție | |
+| `gate/` | the pre-action gate `allow / confirm / block` for a tool-using agent: deterministic rules + a neural decider, 112 labelled cases | shipped, measured, **0 leaks** |
+| `jev-browser/` | the `jev-ultrafast` (browser-use) loop ported onto a minimal CDP client; the decider is swappable via `TYPESAFE_BASE_URL` | works end-to-end; the local decider is DOM-verified |
+| `docs/RESULTS.md` | every number, negatives included, with the name of the evidence file | |
+| `docs/evidence/` | raw run logs + mutation journals (dispatch JSONL) | |
+| `docs/skill-snapshot/` | snapshot of the `typesafe-decisions` skill used to build this | |
 
-Antetul deciderului: **Ollaya** (`~/tools/ollaya`, daemon `127.0.0.1:11435`, `POST /v1/systemone`),
-modele `winnow:e4b` / `laya:*`, GPU RTX 3060 12 GB, `precision=Q8_0`.
+Reference decider: **Ollaya** (`~/tools/ollaya`, daemon on `127.0.0.1:11435`, `POST /v1/systemone`),
+models `winnow:e4b` / `laya:*`, RTX 3060 12 GB, `precision=Q8_0`.
 
-## 2. Ce s-a dovedit
+## 2. What was proven
 
-### 2.1 Deciderul e comutabil prin configurare, nu prin cod
+### 2.1 The decider is swappable by configuration, not by code
 
-`jevbrowser/policy.py` citea deja `TYPESAFE_BASE_URL` din mediu. Deci swap-ul e:
+`jevbrowser/policy.py` already read `TYPESAFE_BASE_URL` from the environment, so the swap is:
 
 ```bash
-export TYPESAFE_BASE_URL=http://127.0.0.1:11435   # System One local, în casă
-export TYPESAFE_API_KEY=local                     # serverul local ignoră antetul
+export TYPESAFE_BASE_URL=http://127.0.0.1:11435   # System One, in the house
+export TYPESAFE_API_KEY=local                     # the local server ignores the header
 export TYPESAFE_MODEL=winnow:e4b
 ./jev-browser doctor                              # -> typesafe api ok (model winnow:e4b, 94 in-tokens)
 ```
 
-Niciun client nu a fost rescris: contractul (`{state, model, questions}` →
-`answers.<head>.{choice, confidence, probabilities}`, probabilități cu sumă 1) e **identic prin construcție**.
-Serverul local a trecut `doctor` din prima încercare.
+No client was rewritten: the contract (`{state, model, questions}` →
+`answers.<head>.{choice, confidence, probabilities}`, probabilities summing to 1) is
+**identical by construction**. The local server passed `doctor` on the first attempt.
 
-### 2.2 Rezultatul pe task (`tests/form.html`, același obiectiv, ambele brațe cu executor local)
+### 2.2 The task result (`tests/form.html`, same goal, both arms with a local executor)
 
-Obiectiv: *„Fill the booking form: full name Maria Ionescu, email maria@example.com, country Romania,
+Goal: *"Fill the booking form: full name Maria Ionescu, email maria@example.com, country Romania,
 accept the terms, then submit the booking."*
 
-| braț | decider | poartă DONE | pași | deciding | DOM final (`#result`) | verdict |
+| arm | decider | DONE gate | steps | deciding | final DOM (`#result`) | verdict |
 |---|---|---|---|---|---|---|
-| A | `jev-latest` (găzduit) | — | 6 | 2,45 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
-| B | `winnow:e4b` (local) | — | 5 | 3,87 s / 4,94 s | — (Submit neatins) | **EȘEC: DONE prematur** |
-| C | `winnow:e4b` (local) | **da** | 6 | 4,88 s / 4,60 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
-| D | `jev-latest` (găzduit) | **da** | 6 | 2,45 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** (poarta tăcută) |
+| A | `jev-latest` (hosted) | — | 6 | 2.45 s | `SUBMITTED\|…\|agree=yes` | **SUCCESS** |
+| B | `winnow:e4b` (local) | — | 5 | 3.87 s / 4.94 s | — (Submit never touched) | **FAIL: premature DONE** |
+| C | `winnow:e4b` (local) | **on** | 6 | 4.88 s / 4.60 s | `SUBMITTED\|…\|agree=yes` | **SUCCESS** |
+| D | `jev-latest` (hosted) | **on** | 6 | 2.45 s | `SUBMITTED\|…\|agree=yes` | **SUCCESS** (gate silent) |
 
-Brațul B a fost reprodus **identic de două ori** (aceleași probabilități: 0,76 / 0,73 / 0,39 la acțiuni,
-0,78 la DONE) → eșecul e determinist, nu zgomot. Toate cele 4 acțiuni locale au fost corecte;
-eșecul e exclusiv **oprirea prematură**: modelul declară DONE înainte de submiterea cerută.
-Brațul D dovedește că poarta nu strică nimic unde deciderul era deja corect.
+Arm B reproduced **identically twice** (same probabilities: 0.76 / 0.73 / 0.39 on the actions,
+0.78 on DONE) — the failure is deterministic, not noise. All four local actions were correct; the
+failure is exclusively the **early stop**: the model declares DONE before the requested submit.
+Arm D proves the gate breaks nothing where the decider was already correct.
 
-Costul extern al brațelor locale: **0 tokeni, 0 biți în afara casei.**
+External cost of the local arms: **0 tokens, 0 bits leaving the house.**
 
-### 2.3 Poarta pre-acțiune (`gate/`) — 112 cazuri etichetate
+### 2.3 The pre-action gate (`gate/`) — 112 labelled cases
 
-Ordine în lanț (reguli **înaintea** deciderului neural):
+Chain order (rules run **before** the neural decider):
 
-1. whitelist citiri/operații locale → `allow`
-2. autorizare explicită în cerere („aprob", „dă-i drumul" — dezactivată de orice negație) → `allow`
-3. ținta a eșuat deja (comparare pe **țintă**: destinatar / chat_id / comandă) → `block`
-4. conflict de proveniență (unealtă ireversibilă a cărei țintă nu apare în cerere) → `confirm`
-5. ne-ireversibile → `allow`
-6. abia acum deciderul neural, care **poate doar escalada la `confirm`, niciodată `block`**
+1. whitelist of local reads/writes → `allow`
+2. explicit authorization in the request ("approve", "go ahead" — disabled by any negation) → `allow`
+3. the target already failed (compared **by target**: recipient / chat_id / command) → `block`
+4. provenance conflict (irreversible tool whose target does not appear in the request) → `confirm`
+5. non-irreversible tools → `allow`
+6. only now the neural decider, which **may only escalate to `confirm`, never to `block`**
 
-| armă | pipeline | determinist singur | decider neural | scurgeri |
+| arm | end-to-end | rules alone | neural decider | leaks |
 |---|---|---|---|---|
-| `winnow:e4b` local | **105/112** | 61/61 | 47/51 (92%) | **0** (era 5) |
-| `jev-latest` găzduit | **106/112** | 61/61 | 48/51 (94%) | **0** (era 4) |
+| `winnow:e4b` local | **105/112** | 58/61 (95%) | 47/51 (92%) | **0** (was 5) |
+| `jev-latest` hosted | **106/112** | 58/61 (95%) | 48/51 (94%) | **0** (was 4) |
 
-Latență: regulile răspund înaintea modelului, deci latența porții rămâne ~0,21 s median (local) /
-~0,54 s (cloud). Cele 6–7 cazuri rămase **nu sunt scurgeri**: fie deciderul refuză o acțiune real
-cerută (bias conservator), fie cere confirmare pe un destinatar nenumit în cerere.
+> **Correction vs. earlier drafts of this README.** The deterministic arm used to print `61/61`.
+> That was a formatting bug in `gate/gate_ext_run.py` (`det, det` in the summary `printf`, so the
+> second number was always the first — 100% by construction, never measured). The true figure is
+> **58/61**, and it was confirmed twice: with the repo's own harness after fixing the print, and
+> with an independent harness that applies only the deterministic chain
+> (`gate/verify_rules_only.py`). The three misses are all conservative over-confirms
+> (`confirm` where the probe label is `allow`), and the leak count is unaffected: **0**.
 
-### 2.4 Al doilea swap: Hammer 2.1 7B (prin shim System One) — 2/2 succes
+Latency: the deterministic rules answer **before** the model, so the gate stays at ~0.21 s median
+(local) / ~0.54 s (hosted). The 6–7 remaining cases **are not leaks**: either the decider refuses an
+action that was genuinely requested (conservative bias, cost = one question), or it asks for
+confirmation on a recipient that is never named in the request.
 
-Hammer 2.1 7B nu vorbește contractul System One, deci a fost așezat în spatele lui:
-`jev-browser/scripts/hammer_systemone.py` traduce o cerere System One într-o cerere de chat Ollama
-și întoarce `answers.<head>.{choice,confidence,probabilities}`. `policy.py` — neatinse.
+### 2.4 Second swap: Hammer 2.1 7B through a System One shim — 2/2 success
 
-| braț | decider | pași | deciding | DOM final | verdict |
+Hammer 2.1 7B does not speak the System One contract, so it was placed behind it:
+`jev-browser/scripts/hammer_systemone.py` translates one System One request into one Ollama chat
+request and maps the answer back to `answers.<head>.{choice,confidence,probabilities}`.
+`policy.py` — untouched.
+
+| arm | decider | steps | deciding | final DOM | verdict |
 |---|---|---|---|---|---|
-| E | `hammer-bm:latest` | 6 | 16,93 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
-| F | `hammer-bm:latest` (repetare) | 6 | 17,97 s | `SUBMITTED\|…\|agree=yes` | **SUCCES** |
+| E | `hammer-bm:latest` | 6 | 16.93 s | `SUBMITTED\|…\|agree=yes` | **SUCCESS** |
+| F | `hammer-bm:latest` (repeat) | 6 | 17.97 s | `SUBMITTED\|…\|agree=yes` | **SUCCESS** |
 
-Secvența corectă din prima (nume → email → țară → checkbox → Confirm booking → DONE), de două ori.
-**Costul:** ~3,5–4× mai lent pe decizie decât `winnow:e4b` (16,9–18,0 s vs 4,6–4,9 s / 6 pași).
-Ca **text helper** Hammer e mai bun decât incumbentul: 4/4 pe cele 4 câmpuri, inclusiv `null`
-corect pe „Notes", unde `llama3:8b` a inventat o valoare. Detalii în `docs/RESULTS.md` §F.
+The correct sequence from the first try (name → email → country → checkbox → Confirm booking → DONE),
+twice. **Cost:** ~3.5–4× slower per decision than `winnow:e4b` (16.9–18.0 s vs 4.6–4.9 s across 6
+steps). As a **text helper** Hammer beats the incumbent: 4/4 on the four fields, including a correct
+`null` on "Notes", where `llama3:8b` invented a value. Details in `docs/RESULTS.md` §F.
 
-## 3. Ce a divergat față de deciderul găzduit (și cum s-a rezolvat)
+## 3. Where the local decider diverged from the hosted one (and how it was fixed)
 
-1. **Schemă mai strictă la head-urile cu un singur candidat.** Ollaya cere `criteria` cu minim 2 itemi;
-   API-ul găzduit acceptă 1 → `HTTP 422 … T_SELECT.CHOICE.CRITERIA … min_length 2`.
-   Rezolvat **determinist**: un head cu un singur candidat nu are nevoie de decizie, deci se rezolvă
-   local, fără să fie întrebat modelul (`build_questions` → `fixed`). Mai puține întrebări, același răspuns.
-2. **DONE prematur la deciderul local.** Rezolvat cu `done_guard()`: dacă obiectivul cere o acțiune de
-   tip submit/confirm/save/send și există un control vizibil, activ, **neatins**, atunci DONE nu se
-   acceptă — se execută acel control. DONE e o afirmație, nu o dovadă.
+1. **Stricter schema on single-candidate heads.** Ollaya requires `criteria` with at least 2 items;
+   the hosted API accepts 1 → `HTTP 422 … T_SELECT.CHOICE.CRITERIA … min_length 2`.
+   Fixed **deterministically**: a head with a single candidate needs no decision, so it is resolved
+   locally without asking the model (`build_questions` → `fixed`). Fewer questions, same answer.
+2. **Premature DONE on the local decider.** Fixed with `done_guard()`: if the goal asks for a
+   submit/confirm/save/send action and a visible, enabled, **untouched** control exists, then DONE is
+   not accepted — that control is executed instead. DONE is a claim, not evidence.
 
-Ambele sunt fix-uri în `policy.py` (backup-ul pre-patch: `jevbrowser/policy.py.orig`, sha256
-`1b252b51…443f1`). Semnătura publică a lui `decide()` a rămas neschimbată.
+Both are fixes in `policy.py` (pre-patch backup: `jevbrowser/policy.py.orig`, sha256
+`1b252b51…443f1`). The public signature of `decide()` is unchanged.
 
-## 4. Cum se reproduce
+## 4. How to reproduce
 
-**Poarta (112 cazuri):**
+### The gate (112 cases)
 
 ```bash
 cd gate
-GB_MODE=local GB_MODEL=winnow:e4b GB_TAG=ext2-winnow python gate_ext_run.py   # -> 105/112, scurgeri 0
-GB_MODE=cloud GB_TAG=ext2-jev python gate_ext_run.py                          # -> 106/112, scurgeri 0
+GB_MODE=local GB_MODEL=winnow:e4b GB_TAG=ext2-winnow python gate_ext_run.py   # -> 105/112, 0 leaks
+GB_MODE=cloud GB_TAG=ext2-jev python gate_ext_run.py                          # -> 106/112, 0 leaks
+
+# deterministic chain only, no model required:
+python3 verify_rules_only.py .                                                # -> 58/61, 0 leaks
 ```
 
-**Bucla de browser cu decider local:**
+### The browser loop with a local decider
+
+The project was originally developed on Windows. The paths are now portable; on Linux:
 
 ```bash
-# 1. Chrome cu CDP (profil dedicat, ca să nu se atingă profilul real)
-"C:/Program Files/Google/Chrome/Application/chrome.exe" \
-  --remote-debugging-port=9222 --user-data-dir=C:/Users/Pusu/.chrome-jev about:blank
+# 1. Chrome with CDP on a dedicated profile (never your real one)
+chromium --remote-debugging-port=9222 --user-data-dir="$PWD/.chrome-jev" about:blank &
 
-# 2. daemonul deciderului local
-#    ~/tools/ollaya  -> 127.0.0.1:11435
+# 2. the local decider daemon (Ollaya -> 127.0.0.1:11435), or a shim in front of any
+#    OpenAI-compatible chat model:
+python3 jev-browser/scripts/hammer_systemone.py --model <your-model> --port 11888 &
 
-# 3. bucla
+# 3. the loop
 cd jev-browser
 export TYPESAFE_BASE_URL=http://127.0.0.1:11435 TYPESAFE_API_KEY=local TYPESAFE_MODEL=winnow:e4b
-./jev-browser run --url file:///C:/Users/Pusu/tools/jev-browser/tests/form.html \
-  --goal "Fill the booking form: full name Maria Ionescu, email maria@example.com, \
-country Romania, accept the terms, then submit the booking." --max-steps 14 -v
+./jev-browser doctor
+./jev-browser run --url "file://$PWD/tests/form.html" \
+  --goal "Fill the booking form: full name Maria Ionescu, email maria@example.com, country Romania, accept the terms, then submit the booking." \
+  --max-steps 14 -v
 
-# 4. dovada: starea reală a paginii, nu raportul agentului
-python3 scripts/state.py     # -> DOM #result : 'SUBMITTED|…'  VERDICT: SUCCES
+# 4. evidence: the real page state, not the agent's report
+python3 scripts/state.py     # -> DOM #result : 'SUBMITTED|…'  VERDICT: SUCCESS
 ```
 
-Pentru brațul găzduit: `unset TYPESAFE_BASE_URL TYPESAFE_API_KEY` + `export TYPESAFE_MODEL=jev-latest`
-(cheia stă în `~/.typesafe/key`, **nu** în repo).
+For the hosted arm: `unset TYPESAFE_BASE_URL TYPESAFE_API_KEY` and
+`export TYPESAFE_MODEL=jev-latest` (the key lives in `~/.typesafe/key`, **not** in the repo).
 
-## 5. Ce NU este dovedit (limite)
+**Setup notes for a fresh Linux machine**
 
-- **O singură pagină, un singur obiectiv.** `tests/form.html` e un fixture. Nu există încă o probă
-  multi-site cu etichete verificate în DOM.
-- **`done_guard` e euristic**, calibrat pe verbele de submit din engleză/română; o pagină cu „Next"
-  decorativ, neatins, îl poate face să insiste. Nu a fost măsurat pe pagini reale.
-- **Deciderul local e ~2,4× mai lent per decizie** (≈1,0 s vs 0,41 s) pe winnow:e4b Q8 pe 3060.
-  Nu s-a testat `laya:*` (mult mai mic) pe același task.
-- **Brațul cloud a consumat real** (9 937 in / 1 430 out tokeni pe rulare) — swap-ul local elimină asta.
-- Poarta neurală **nu** are voie să blocheze: `block` rămâne exclusiv determinist.
+- `pip install websocket-client` (the only runtime dependency; a project-local `.venv` is picked up
+  automatically by the launcher).
+- The launchers resolve their own directory, so the repo can live anywhere.
 
-## 6. De ce contează
+## 5. What is NOT proven (limits)
 
-Partea deschisă a ecosistemului e **clientul**, niciodată judecătorul: `jev-ultrafast` e MIT, dar
-deciderul lui e cloud-only și în early access. Aici bucla funcționează cu judecătorul **în casă**:
-același contract, zero cost marginal, zero date care ies din rețea, iar diferența de comportament
-(opusă pe DONE) se închide cu **reguli**, nu cu un model mai mare.
+- **One page, one goal.** `tests/form.html` is a fixture. There is no multi-site probe with
+  DOM-verified labels yet.
+- **`done_guard` is a heuristic**, calibrated on English/Romanian submit verbs; a page with a
+  decorative, untouched "Next" can make it insist. It has not been measured on real pages.
+- **The local decider is ~2.4× slower per decision** (≈1.0 s vs 0.41 s) on `winnow:e4b` Q8 on a
+  3060. `laya:*` (much smaller) has not been tested on the same task.
+- **The cloud arm really consumed tokens** (9,937 in / 1,430 out per run) — the local swap removes that.
+- **The neural gate is not allowed to block:** `block` stays exclusively deterministic.
+- **The decision quality tracks the decider.** Dropping in a small general chat model (tested:
+  `gemma2:2b` through the shim, on Linux) keeps the whole pipeline running — CDP, the System One
+  contract, the element table, the guards and the dispatch log all behave — but the loop stalls,
+  repeatedly choosing `CLICK` on a textbox instead of `TYPE_TEXT`. That is a model-capability limit,
+  not an architecture one, and it is exactly what the shim is designed to expose as a score.
+
+## 6. Why it matters
+
+The open half of this ecosystem is **the client**, never the judge: `jev-ultrafast` is MIT, but its
+decider is cloud-only and in early access. Here the loop runs with the judge **in the house** — same
+contract, zero marginal cost, zero data leaving the network — and the behavioural difference (which
+is *opposite* on DONE) is closed with **rules**, not with a bigger model.
+
+---
+
+## License
+
+MIT. Built by [Pusu](https://github.com/pusucip25).

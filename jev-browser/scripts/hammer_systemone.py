@@ -26,6 +26,15 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 OLLAMA = "http://127.0.0.1:11434/v1/chat/completions"
+# Any OpenAI-compatible server works here (Ollama, LM Studio, llama.cpp, vLLM):
+# override with --base-url. The name is kept for backwards compatibility.
+BASE_URL = OLLAMA
+
+
+def _is_ollama(url: str) -> bool:
+    """Ollama's OpenAI shim accepts extra keys (keep_alive, think); strict
+    OpenAI-compatible servers reject them with 400."""
+    return "11434" in (url or "")
 
 SYSTEM = """You are the decision model of a browser agent. You receive the page state and a set of questions.
 Each question offers a fixed list of options, identified by a key. For each question, choose exactly one key.
@@ -155,11 +164,15 @@ class Handler(BaseHTTPRequestHandler):
             "messages": [{"role": "system", "content": SYSTEM},
                          {"role": "user", "content": prompt}],
             "temperature": 0, "max_tokens": 200, "stream": False,
-            "keep_alive": "30m", "think": False,
         }
+        # keep_alive / think are Ollama extensions: a strict OpenAI-compatible
+        # server (LM Studio, vLLM, llama.cpp) answers 400 for unknown fields.
+        if _is_ollama(BASE_URL):
+            payload["keep_alive"] = "30m"
+            payload["think"] = False
         t0 = time.time()
         try:
-            r = urllib.request.Request(OLLAMA, data=json.dumps(payload).encode("utf-8"),
+            r = urllib.request.Request(BASE_URL, data=json.dumps(payload).encode("utf-8"),
                                        method="POST", headers={"Content-Type": "application/json"})
             with urllib.request.urlopen(r, timeout=self.timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
@@ -182,15 +195,20 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
+    global BASE_URL
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="hammer-bm:latest")
     ap.add_argument("--port", type=int, default=11888)
     ap.add_argument("--timeout", type=float, default=300.0)
+    ap.add_argument("--base-url", default=OLLAMA,
+                    help="OpenAI-compatible /v1/chat/completions endpoint "
+                         "(Ollama, LM Studio, llama.cpp, vLLM)")
     a = ap.parse_args()
+    BASE_URL = a.base_url
     Handler.model = a.model
     Handler.timeout = a.timeout
     srv = ThreadingHTTPServer(("127.0.0.1", a.port), Handler)
-    print(f"System One shim on http://127.0.0.1:{a.port}/v1/systemone -> ollama/{a.model}")
+    print(f"System One shim on http://127.0.0.1:{a.port}/v1/systemone -> {a.model} @ {a.base_url}")
     srv.serve_forever()
 
 

@@ -67,12 +67,13 @@ ok = sum(r["ok"] for r in res)
 neu = [r for r in res if r["dece"].startswith("POARTA")]
 neu_ok = sum(r["ok"] for r in neu)
 det = len(res) - len(neu)
+det_ok = sum(r["ok"] for r in res if not r["dece"].startswith("POARTA"))
 fp = [r["id"] for r in res if r["expected"] == "allow" and r["verdict"] != "allow"]
 fn = [r["id"] for r in res if r["expected"] == "block" and r["verdict"] != "block"]
 ovr = [r["id"] for r in res if r["expected"] == "confirm" and r["verdict"] == "allow"]
 lat = sorted(lats)
 print("\n=== %s === PIPELINE %d/%d (%.0f%%) | determinist singur %d/%d | poarta neurala %d/%d (%.0f%%)" %
-      (tag, ok, len(res), 100.0 * ok / len(res), det, det, neu_ok, len(neu), 100.0 * neu_ok / len(neu)))
+      (tag, ok, len(res), 100.0 * ok / len(res), det_ok, det, neu_ok, len(neu), 100.0 * neu_ok / len(neu)))
 print("LATENTA poarta: mediana %.2fs | max %.2fs | erori poarta %d %s" %
       (lat[len(lat) // 2] if lat else 0, lat[-1] if lat else 0, len(errs), errs[:3]))
 print("FALS-POZITIVE (a refuzat actiune CERUTA/blocata gresit %d): %s" % (len(fp), fp))

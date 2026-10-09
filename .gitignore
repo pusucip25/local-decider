@@ -11,3 +11,4 @@ results_smoke*.json
 venv/
 node_modules/
 *.log.gz
+.chrome-jev/
