@@ -1,7 +1,8 @@
 # local-decider
 
 **A browser agent whose *decision model* — the part that picks the next action — runs entirely on a
-local GPU, behind the same HTTP contract as the hosted one. Plus one hard rule:
+local GPU, behind the same HTTP contract as TypeSafe's hosted Jev (System One), one environment
+variable apart. Plus one hard rule:
 anything that can be decided by a rule is decided by a rule, not by weights.**
 
 Measured on a labelled 112-case safety probe and on a live CDP browser loop, with the final state
@@ -9,6 +10,9 @@ verified **in the DOM, not in the agent's own report**.
 
 > A false `allow` is an incident; a false `confirm` is a question.
 > **The gate is judged by leaks, not by accuracy.**
+>
+> On this machine: **Jev 90%** as a judge on 54 labelled points, versus **85%** for the local
+> `winnow:e4b` — which is free and never leaves the machine. Hence the swap matters.
 
 *Română: [README.ro.md](README.ro.md).*
 
